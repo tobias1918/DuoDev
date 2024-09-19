@@ -1,0 +1,129 @@
+
+<div class="card border-0 rounded-4">
+    <div class="card-body p-3 p-md-4 p-xl-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="mb-4">
+            <h3>Registrarse</h3>
+            <p>Ya tienes cuenta? <a (click)="onLoginClick()" style="cursor: pointer;color: var(--bs-primary);">Inicia sesión</a></p>
+          </div>
+        </div>
+      </div>
+      <form [formGroup]="formRegister" (ngSubmit)="registrarse()">
+        <div class="row gy-3 overflow-hidden">
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input type="text" formControlName="nombre" class="form-control" 
+              [class.is-valid]="this.formRegister.get('nombre')?.valid" 
+              [class.is-invalid]="this.formRegister.get('nombre')?.invalid && this.formRegister.get('nombre')?.touched" 
+              name="first_name" id="first_name" placeholder="Nombre"
+                required>
+                <div class="invalid-feedback">
+                 Por favor ingrese un nombre
+                </div>
+              <label for="first_name" class="form-label">Nombre</label>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+              <input type="text" formControlName="apellido" class="form-control" 
+              [class.is-valid]="this.formRegister.get('apellido')?.valid" 
+              [class.is-invalid]="this.formRegister.get('apellido')?.invalid && this.formRegister.get('apellido')?.touched" 
+              name="last_name" id="last_name" placeholder="Apellido"
+                required>
+                <div class="invalid-feedback">
+                  Por favor ingrese un apellido
+                 </div>
+              <label for="last_name" class="form-label">Apellido</label>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-floating mb-3">
+              <input type="email" formControlName="email" class="form-control"
+              [class.is-valid]="this.formRegister.get('email')?.valid" 
+              [class.is-invalid]="this.formRegister.get('email')?.invalid && this.formRegister.get('email')?.touched" 
+              name="email" id="email" placeholder="name@example.com"
+                required>
+                <div class="invalid-feedback">
+                  Por favor ingrese un email valido
+                 </div>
+              <label for="email" class="form-label">Email</label>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="form-floating mb-3">
+              <input type="password" formControlName="password" class="form-control"
+                [class.is-valid]="this.formRegister.get('password')?.valid && this.formRegister.get('password')?.touched"
+                [class.is-invalid]="this.formRegister.get('password')?.invalid && this.formRegister.get('password')?.touched"
+                name="password" id="password" placeholder="Contraseña" required>
+              
+              <label for="password" class="form-label">Contraseña</label>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="form-floating mb-3">
+              <input type="password" formControlName="confirmacionPassword" class="form-control"
+                [class.is-valid]="!this.formRegister.get('confirmacionPassword')?.hasError('mismatch') && this.formRegister.get('confirmacionPassword')?.touched"
+                [class.is-invalid]="this.formRegister.get('confirmacionPassword')?.hasError('mismatch') && this.formRegister.get('confirmacionPassword')?.touched"
+                name="confirm_password" id="confirm_password"
+                placeholder="Confirmar Contraseña" required>
+              <div *ngIf="this.formRegister.get('confirmacionPassword')?.hasError('mismatch') && this.formRegister.get('confirmacionPassword')?.touched" class="invalid-feedback">
+                Confirme la contraseña. Las contraseñas no coinciden.
+              </div>
+              <div *ngIf="!this.formRegister.get('confirmacionPassword')?.hasError('mismatch') && this.formRegister.get('confirmacionPassword')?.touched" class="valid-feedback">
+                Las contraseñas coinciden.
+              </div>
+              <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="d-grid">
+              <button [disabled]="this.formRegister.invalid" class="btn btn-primary btn-lg" type="submit">Registrarse</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="titulo mb-3 text-center">
+                <h4>Listado de Tarjetas</h4>
+            </div>
+            <table class="table">
+                <tbody>
+                    <!-- <tr *ngFor="let usuario of listUsuarios;">
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.apellido}}</td>
+                        <td>{{usuario.email}}</td>
+                        <td>{{usuario.password}}</td>
+                        <td><i class="fa-regular fa-pen-to-square text-info far"></i></td>
+                        <td>
+                            <i class="fa-solid fa-trash-can text-danger far"></i>
+                        </td>
+                    </tr> -->
+
+                    @for (usuario of  usuarioList;track $index ){
+                      <tr>
+                        <td>{{usuario.id}}</td>
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.apellido}}</td>
+                        <td>{{usuario.email}}</td>
+                        <td><i class="fa-regular fa-pen-to-square text-info far"></i></td>
+                        <td>
+                            <i class="fa-solid fa-trash-can text-danger far"></i>
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>  

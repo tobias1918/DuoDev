@@ -1,0 +1,21 @@
+.contenedor-general{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.contenedor-salas{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 150vh;
+    padding: 25px;
+    border-radius: 15px;
+    max-height: 73vh;
+    overflow-y: scroll;
+    border: 2px solid black;
+}
+
