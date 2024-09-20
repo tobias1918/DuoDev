@@ -1,0 +1,56 @@
+# .gitignore for .NET 6
+
+# Build Folders
+bin/
+obj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# Visual Studio
+.vscode/
+.vs/
+.vscode/settings.json
+
+# Rider
+.idea/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Configuration
+appsettings*.json
+appsettings.*.json
+
+# Package directories
+node_modules/
+wwwroot/lib/
+
+# Dependency directories
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+# Dotnet specific files
+*.dbmdl
+*.dbproj.user
+*.pfx
+*.publishsettings
+
+# Static files related to publishing
+staticwebassets/
+
+# Local History for JetBrains IDEs
+.idea/
+
+# Docker files
+**/[Dd]ockerfile*
+**/[Dd]ockerignore
