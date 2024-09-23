@@ -42,25 +42,20 @@ namespace GestionSalas.UseCase.UseCases.Implementations
 
                 User user = await GetUserId(userDTO.idUser);
 
-                ////if (user != null)
-                ////{
+                if (user != null)
+                {
+                    if (userDTO.name != null)
+                        user.name = userDTO.name;
 
-                ////    if (userDTO.name != null)
-                ////        user.nameSala = userDTO.nameSala;
+                    if (userDTO.surname != null)
+                        user.surname = userDTO.surname;
 
-                ////    if (userDTO.codSala != null)
-                ////        user.codSala = userDTO.codSala;
+                    if (userDTO.email != null)
+                        user.email = userDTO.email;
 
-                ////    if (userDTO.floorSala.HasValue)
-                ////        user.floorSala = userDTO.floorSala.Value;
-
-                ////    if (userDTO.capacitySala.HasValue)
-                ////        user.capacitySala = userDTO.capacitySala.Value;
-
-                ////}
-
-
-
+                    if (userDTO.password != null)
+                        user.password = userDTO.password;
+                }
 
             }
         }
@@ -69,10 +64,10 @@ namespace GestionSalas.UseCase.UseCases.Implementations
             await _userRepository.DeleteUser(idUser);
         }
 
-        public async Task<UserDTO> GetUserId(int id)
+        public async Task<User> GetUserId(int id)
         {
            var user =  await _userRepository.GetUserId(id);
-            return new UserDTO
+            return new User
             {
                 idUser = user.idUser,
                 name = user.name,
@@ -81,14 +76,15 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                 password = user.password,
             };
         }
-        public async Task<List<UserDTO>> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
-            var usersDTOs = new List<UserDTO>();
+            var listaUserSalida = new List<User>();
             var users = await _userRepository.GetAllUsers();
 
             foreach (var user in users)
             {
-                var userDTO = new UserDTO
+                
+                var userSalida = new User
                 {
                     idUser = user.idUser,
                     name = user.name,
@@ -97,10 +93,10 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                     password = user.password,
 
                 };
-                usersDTOs.Add(userDTO);
+                listaUserSalida.Add(userSalida);
             }
 
-            return usersDTOs;
+            return listaUserSalida;
 
         }
         

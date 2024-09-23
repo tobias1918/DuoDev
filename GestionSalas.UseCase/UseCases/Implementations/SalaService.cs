@@ -40,7 +40,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
 
         }
 
-        public async Task UpdateSala(UpdateSalaDTO salaDTO)
+        public async Task UpdateSala(SalaDTO salaDTO)
         {
             try
             {
@@ -57,11 +57,11 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                         if (salaDTO.codSala != null)
                             sala.codSala = salaDTO.codSala;
 
-                        if (salaDTO.floorSala.HasValue)
-                            sala.floorSala = salaDTO.floorSala.Value;
+                        if (salaDTO.floorSala != null)
+                            sala.floorSala = salaDTO.floorSala;
 
-                        if (salaDTO.capacitySala.HasValue)
-                            sala.capacitySala = salaDTO.capacitySala.Value;
+                        if (salaDTO.capacitySala != null)
+                            sala.capacitySala = salaDTO.capacitySala;
                         
                     }
                    

@@ -12,7 +12,7 @@ namespace GestionSalas.UseCase.UseCases.Interfaces
     {
         Task CreateSala(SalaDTO sala);
         Task DeleteSala(int idSala);
-        Task UpdateSala(UpdateSalaDTO sala);
+        Task UpdateSala(SalaDTO sala);
         Task<Sala> GetSalaId(int idSala);
         //Task<List<Sala>> GetSalasAvailable(Sala sala);
         //Task<List<Sala>> GetSalasLowerReserv(Sala sala);
