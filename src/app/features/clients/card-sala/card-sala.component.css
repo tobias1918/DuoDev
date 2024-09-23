@@ -1,0 +1,13 @@
+
+.horarios{
+    cursor: pointer;
+    list-style: none;
+    color: white;
+    background-color: rgb(0, 85, 214);
+    border-radius: 15px;
+    margin: 3px;
+    padding: 5px 20px;
+    border: none;
+}
+
+

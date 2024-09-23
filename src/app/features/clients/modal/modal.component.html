@@ -1,0 +1,70 @@
+<!-- Button trigger modal --> 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalConfirm">
+  Confirmar Reserva
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalConfirm" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header" style="border: none; margin-top: 20px;">
+        <h5 class="modal-title fw-bold" id="confirmModalLabel" style="font-size: 1.5rem; color: #212529; width: 100%; text-align: center; font-size: 30px;">
+          ¿Desea confirmar la reserva?
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: #212529;">
+        <div class="list-group">
+          <div class="list-group-item d-flex gap-2">
+            <i class="bi bi-clock icons-list"></i>
+            <span>
+              <strong>Hora Inicial: 10:00 PM</strong>
+              <small class="d-block text-body-secondary">Hora de inicio de la reserva</small>
+            </span>
+          </div>
+        
+          <div class="list-group-item d-flex gap-2">
+            <i class="bi bi-clock-fill icons-list"></i>
+            <span>
+              <strong>Hora Fin: 12:00 PM</strong>
+              <small class="d-block text-body-secondary">Hora de finalización de la reserva</small>
+            </span>
+          </div>
+        
+          <div class="list-group-item d-flex gap-2">
+            <i class="bi bi-star icons-list"></i>
+            <span>
+              <strong>Prioridad: Alta</strong>
+              <small class="d-block text-body-secondary">Nivel de prioridad de la reserva</small>
+            </span>
+          </div>
+          <div class="list-group-item d-flex gap-2">
+            <i class="bi bi-building icons-list"></i>
+            <span>
+              <strong>Piso: 2</strong>
+              <small class="d-block text-body-secondary">Número de piso de la reserva</small>
+            </span>
+          </div>
+          <div class="list-group-item d-flex gap-2">
+            <i class="bi bi-door-open icons-list"></i>
+            <span>
+              <strong>Habitación: 1</strong>
+              <small class="d-block text-body-secondary">Número de habitación de la reserva</small>
+            </span>
+          </div>
+          <div class="list-group-item d-flex gap-2">
+            <i class="bi bi-people icons-list"></i>
+            <span>
+              <strong>Capacidad: 26</strong>
+              <small class="d-block text-body-secondary">Capacidad máxima de personas en la reserva</small>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

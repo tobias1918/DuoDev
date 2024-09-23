@@ -1,15 +1,43 @@
-<div class="card border-dark mb-3" style="max-width: 18rem;">
-    <div class="card-header">Disponible</div>
+<div class="card mb-3 shadow" style="max-width: 600px;min-width: 600px;">
+    <div class="card-header text-center"></div>
 
-    <div class="card-body">
-        <h5 class="card-title">Piso 4 | Sala 2</h5>
+    <div class="card-body d-flex justify-content-center align-items-center">
+        <h5 class="card-title"></h5>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Capacidad maxima: 29</li>
-            <li class="list-group-item">Horario : 17:30 a 18:00</li>
-            <li class="list-group-item">Prioridad : Media</li>
+            <li class="list-group-item">
+                <h3><strong>Piso {{ piso }} : Sala {{ habitacion }}</strong> </h3>
+            </li>
+            <li class="list-group-item">Capacidad maxima: {{ capacidad }}</li>
         </ul>
-        <div class="card-body">
-            <a href="#" class="btn btn-primary  ">Seleccionar sala</a>
+        <div>
+            <div class="card-body" style="height: 200px; width: 250px;">
+                <div class="horarios-container" style="height: 125px;">
+                    <div class="horarios-page pagina">
+                        <div class="row gx-2">
+                            <div class="col-6" *ngFor="let horario of pagedHorarios">
+                                <button class="horarios w-100"
+                                    [ngClass]="{'btn-success': horario.Disponible, 'btn-danger': !horario.Disponible}">
+                                    {{ horario.HoraInicio }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-container d-flex flex-wrap justify-content-between mt-2">
+                    <button (click)="prevPage()" class="btn btn-secondary flex-fill me-2"
+                        [disabled]="currentPage === 0">Anterior</button>
+                    <button (click)="nextPage()" class="btn btn-primary flex-fill"
+                        [disabled]="currentPage === totalPages - 1">Siguiente</button>
+                </div>
+
+            </div>
+
+
+
         </div>
+
+
+
+
     </div>
 </div>

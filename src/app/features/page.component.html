@@ -1,0 +1,70 @@
+<main style="display: flex;"> 
+
+    <aside class="d-flex flex-nowrap sticky-sidebar" style="position: sticky; top: 0; height: 100vh;">
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+          <i class="bi bi-bootstrap me-2" style="font-size: 2rem;"></i>
+          <span class="fs-4">Gestion Reservas</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a routerLink="" class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='home'}"
+              (click)="onOption('home')" aria-current="page">
+              <i class="bi bi-house-door me-2"></i>
+              Home
+            </a>
+          </li>
+          <li>
+            <a routerLink="reserva" class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='reserva'}"
+              (click)="onOption('reserva')" aria-current="page">
+              <i class="bi bi-search"></i>
+              Buscar reserva
+            </a>
+          </li>
+          <li>
+            <a routerLink="mis-reservas" class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='buscarReserva'}"
+              (click)="onOption('buscarReserva')" aria-current="page">
+              <i class="bi bi-calendar3"></i>
+              Mis reservas
+            </a>
+          </li>
+          <li>
+            <a class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='panelUsuarios'}"
+              (click)="onOption('panelUsuarios')" aria-current="page">
+              <i class="bi bi-person-vcard"></i>
+              Panel Usuarios (admin)
+            </a>
+          </li>
+          <li>
+            <a class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='panelSalas'}"
+              (click)="onOption('panelSalas')" aria-current="page">
+              <i class="bi bi-gear"></i>
+              Panel Salas (admin)
+            </a>
+          </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong>User</strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+            <li><a class="dropdown-item" routerLink="perfil" >Perfil</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  
+    <div style=" width: 100%; max-height: 100vh; overflow-y: auto;">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  

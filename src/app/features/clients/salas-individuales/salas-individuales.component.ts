@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 
+
 @Component({
   selector: 'app-salas-individuales',
   standalone: true,
@@ -31,10 +32,6 @@ export class SalasIndividualesComponent implements OnInit {
     });
   }
 
-  // loadSalas() {
-  //   const url = `https://tu-api-url/api/salas/disponibles?numeroAsistentes=${this.numeroAsistentes}&horario=${this.horario}&prioridad=${this.prioridad}`;
-  //   this.http.get<any[]>(url).subscribe(data => {
-  //     this.salas = data;
-  //   });
-  // }
+  
+
 }

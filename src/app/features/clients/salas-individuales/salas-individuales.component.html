@@ -1,1 +1,65 @@
-<h1>Salas Individuales</h1>
+<div class="contenedor-general">
+    <div style="width: 76%;">
+
+
+
+        <div class="border rounded mt-3 p-5 text-bg-dark">
+            <h1 class="display-4 fw-bold ">Sala Individuales</h1>
+
+            <div class="filtros d-flex align-items-center" style="max-width: 90%;">
+
+                <div class="mb-3 flex-fill me-3">
+                    <label for="exampleFormControlInput1" class="form-label">Capacidad</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Ingrese la capacidad">
+                </div>
+
+                <div class="mb-3 flex-fill me-3">
+                    <label for="select1" class="form-label">N° De Piso</label>
+                    <select class="form-select" id="select1" aria-label="Seleccionar una opción">
+                        <option selected>Seleccionar una opción</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 flex-fill me-3">
+                    <label for="select2" class="form-label">N° De Habitación</label>
+                    <select class="form-select" id="select2" aria-label="Seleccionar una opción">
+                        <option selected>Seleccionar una opción</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <button type="button" class="btn btn-primary">Buscar sala</button>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="contenedor-cards pt-4" style="padding-bottom: 60px;height: auto;">
+            <app-card-sala [prioridad]="'Alta'" [piso]="2" [habitacion]="1" [capacidad]="26">
+            </app-card-sala>
+
+            <app-card-sala [prioridad]="'Alta'" [piso]="2" [habitacion]="1" [capacidad]="26">
+            </app-card-sala>
+            <app-card-sala [prioridad]="'Alta'" [piso]="2" [habitacion]="1" [capacidad]="26">
+            </app-card-sala>
+            <app-card-sala [prioridad]="'Alta'" [piso]="2" [habitacion]="1" [capacidad]="26">
+            </app-card-sala>
+        </div>
+
+
+
+    </div>
+</div>

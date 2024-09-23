@@ -1,0 +1,15 @@
+.contenedor-general{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-cards{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 22px;
+
+    height: 80vh;
+
+}
