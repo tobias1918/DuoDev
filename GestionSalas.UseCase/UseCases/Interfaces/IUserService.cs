@@ -13,8 +13,8 @@ namespace GestionSalas.UseCase.UseCases.Interfaces
         Task CreateUser(UserDTO userDTO);
         Task UpdateUser(UserDTO userDTO);
         Task DeleteUser(int idUser);
-        Task<UserDTO> GetUserId(int idUser);
-        Task<List<UserDTO>> GetAllUsers();
+        Task<User> GetUserId(int idUser);
+        Task<List<User>> GetAllUsers();
         Task<User> VerifyLogin(LoginDTO loginDTO);
         Task SaveChangesAsync();
     }

@@ -10,9 +10,8 @@ namespace GestionSalas.Entity.DTOs
     {
         public int idSala { get; set; }
         public string nameSala { get; set; }
-        public string numSala { get; set; }
-        public int pisoSala { get; set; }
-        public short capacidadSala { get; set; }
-        public bool disponibilidad { get; set; }
+        public string codSala { get; set; }
+        public byte floorSala { get; set; }
+        public byte capacitySala { get; set; }
     }
 }

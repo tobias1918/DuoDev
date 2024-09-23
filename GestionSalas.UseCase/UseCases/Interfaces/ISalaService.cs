@@ -1,17 +1,18 @@
-﻿using GestionSalas.Entity.Entidades;
+﻿using GestionSalas.Entity.DTOs;
+using GestionSalas.Entity.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionSalas.Repositories.Reposories.interfaces
+namespace GestionSalas.UseCase.UseCases.Interfaces
 {
-    public interface ISalaRepository
+    public interface ISalaService
     {
-        Task CreateSala(Sala sala);
+        Task CreateSala(SalaDTO sala);
         Task DeleteSala(int idSala);
-        Task UpdateSala(Sala sala);
+        Task UpdateSala(UpdateSalaDTO sala);
         Task<Sala> GetSalaId(int idSala);
         //Task<List<Sala>> GetSalasAvailable(Sala sala);
         //Task<List<Sala>> GetSalasLowerReserv(Sala sala);
@@ -20,5 +21,3 @@ namespace GestionSalas.Repositories.Reposories.interfaces
         Task SaveChangesAsync();
     }
 }
-
-//SEGUIR DESDE ACA

@@ -16,7 +16,7 @@ namespace GestionSalas.API.Controllers
         }
 
         // GET: api/user
-        [HttpGet]
+        [HttpGet("TraerTodosUsuarios")]
         public async Task<ActionResult<List<UserDTO>>> GetAll()
         {
             try
@@ -32,7 +32,7 @@ namespace GestionSalas.API.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("TraerUsuarioPorID")]
         public async Task<ActionResult<UserDTO>> GetById(int id)
         {
             try
@@ -51,7 +51,7 @@ namespace GestionSalas.API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("CrearUser")]
         public async Task<ActionResult> Create([FromBody] UserDTO userDTO)
         {
             if (userDTO == null)
@@ -72,7 +72,7 @@ namespace GestionSalas.API.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut("ActualizarUser")]
         public async Task<ActionResult> Update(int id, [FromBody] UserDTO userDTO)
         {
             if (userDTO == null || id != userDTO.idUser)
@@ -92,7 +92,7 @@ namespace GestionSalas.API.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("BorrarUser")]
         public async Task<ActionResult> Delete(int id)
         {
             try
@@ -107,7 +107,7 @@ namespace GestionSalas.API.Controllers
             }
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginRequest)
         {
             try

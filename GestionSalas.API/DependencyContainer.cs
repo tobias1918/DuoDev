@@ -11,9 +11,10 @@ namespace GestionSalas.API
     {
         public static IServiceCollection AddDependencies(this IServiceCollection services, IConfiguration configuration)
         {
+
             // Configuración del DbContext
             services.AddDbContext<GestionSalasContext>(options =>
-                options.UseMySQL(configuration.GetConnectionString("Connection1")));
+                options.UseSqlServer(configuration.GetConnectionString("Connection1")));
 
             // Registro de repositorios
             services.AddScoped<IUserRepository, UserRepository>();
@@ -21,8 +22,8 @@ namespace GestionSalas.API
             // Registro de servicios
             services.AddScoped<IUserService, UserService>();
 
-            // Configuración de AutoMapper
-            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<ISalaRepository, SalaRepository>();
+            services.AddScoped<ISalaService, SalaService>();
 
             return services;
         }

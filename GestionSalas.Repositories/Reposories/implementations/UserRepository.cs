@@ -36,24 +36,11 @@ namespace GestionSalas.Repositories.Reposories.implementations
             }
         }
         public async Task CreateUser(User user)
-        {
+        { //VER PORQUE SI EL CORREO YA ESTA REGISTRADO LO QUE DEVUELVE ES EL ERROR QUE ESTA EN EL CATCH
             try
             {
-                var userContx = _context.Users
-                 .SingleOrDefaultAsync(e => e.email == user.email);
-
-                //if (userContx == null)
-                //{
-                //    _context.Users.Update(user);
-                //    await _context.SaveChangesAsync();
-                //}
-                //else
-                //{
-                //    throw new Exception("El correo ya esta registrado");
-                //}
-
-                bool userExists = await _context.Users
-                .AnyAsync(e => e.email == user.email);
+                // Verifica si el correo ya está registrado
+                bool userExists = await _context.Users.AnyAsync(e => e.email == user.email);
 
                 if (userExists)
                 {
@@ -64,9 +51,44 @@ namespace GestionSalas.Repositories.Reposories.implementations
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new Exception("Error al crear el usuario. Error: ", ex);
             }
+
+
+
+            /* try
+             {
+                 var userContx = _context.Users
+                  .SingleOrDefaultAsync(e => e.email == user.email);
+
+                 //if (userContx == null)
+                 //{
+                 //    _context.Users.Update(user);
+                 //    await _context.SaveChangesAsync();
+                 //}
+                 //else
+                 //{
+                 //    throw new Exception("El correo ya esta registrado");
+                 //}
+
+                 bool userExists = await _context.Users
+                 .AnyAsync(e => e.email == user.email);
+
+                 if (userExists)
+                 {
+                     throw new Exception("El correo ya está registrado");
+                 }
+
+                 // Agrega el nuevo usuario
+                 await _context.Users.AddAsync(user);
+                 await _context.SaveChangesAsync();
+             }
+             catch (Exception ex) {
+                 throw new Exception("Error al crear el usuario. Error: ", ex);
+             }
+             */
         }
 
         public async Task UpdateUser(User user)

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GestionSalas.Entity.DTOs;
 using GestionSalas.Entity.Entidades;
+using GestionSalas.Repositories.Reposories.implementations;
 using GestionSalas.Repositories.Reposories.interfaces;
 using GestionSalas.UseCase.UseCases.Interfaces;
 using System;
@@ -36,20 +37,33 @@ namespace GestionSalas.UseCase.UseCases.Implementations
 
         public async Task UpdateUser(UserDTO userDTO)
         {
-            if (userDTO.idUser != 0 && userDTO != null) {
-                var user = new User
-                {
-                    name = userDTO.name,
-                    surname = userDTO.surname,
-                    email = userDTO.email,
-                    password = userDTO.password
-                };
-                await _userRepository.UpdateUser(user);
+            if (userDTO.idUser != 0 && userDTO != null)
+            {
+
+                User user = await GetUserId(userDTO.idUser);
+
+                ////if (user != null)
+                ////{
+
+                ////    if (userDTO.name != null)
+                ////        user.nameSala = userDTO.nameSala;
+
+                ////    if (userDTO.codSala != null)
+                ////        user.codSala = userDTO.codSala;
+
+                ////    if (userDTO.floorSala.HasValue)
+                ////        user.floorSala = userDTO.floorSala.Value;
+
+                ////    if (userDTO.capacitySala.HasValue)
+                ////        user.capacitySala = userDTO.capacitySala.Value;
+
+                ////}
+
+
+
+
             }
-
-            
         }
-
         public async Task DeleteUser(int idUser)
         {
             await _userRepository.DeleteUser(idUser);

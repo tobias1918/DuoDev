@@ -13,13 +13,13 @@ namespace GestionSalas.Repositories.ContextGS.Contexto
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("clientes");
+            builder.ToTable("usuarios");
             //declaro la id
             builder.HasKey(u => u.idUser);
             //la asigno
             builder.Property(u => u.idUser)
             .IsRequired()
-            .HasColumnName("id_cliente")
+            .HasColumnName("id_user")
             .HasColumnType("int");
 
             //doy contexto para los atributos de la tabla 
