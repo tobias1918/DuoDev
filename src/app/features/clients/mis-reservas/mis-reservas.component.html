@@ -1,0 +1,134 @@
+
+<div class="contenedor-general">
+    <!-- Contenedor superior con "TUS RESERVAS" y filtro -->
+    <div class="border rounded p-3 text-bg-dark mb-3 bg-dark text-white border-bottom d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <h4 class="mb-0">TUS RESERVAS</h4>
+      </div>
+      <div>
+        <label for="estadoReserva" class="form-label me-2">Filtrar por estado:</label>
+        <select id="estadoReserva" class="form-select" style="width: 200px;">
+          <option value="todas" selected>Todas</option>
+          <option value="cancelada">Cancelada</option>
+          <option value="proxima">Próxima</option>
+          <option value="en-curso">En Curso</option>
+          <option value="reprogramada">Reprogramada</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Contenedor de las tarjetas individuales con scroll -->
+    <div class="contenedor-cards pt-4" style="max-height: 500px; overflow-y: auto; overflow-x: hidden;">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        <!-- Tarjetas individuales -->
+        <div class="col">
+          <app-card-mis-salas [prioridad]="'Alta'" [piso]="1" [habitacion]="2" [capacidad]="21"></app-card-mis-salas>
+        </div>
+        <div class="col">
+          <app-card-mis-salas [prioridad]="'Alta'" [piso]="2" [habitacion]="3" [capacidad]="20"></app-card-mis-salas>
+        </div>
+        <div class="col">
+            <app-card-mis-salas [prioridad]="'Alta'" [piso]="1" [habitacion]="2" [capacidad]="21"></app-card-mis-salas>
+          </div>
+
+        
+        
+        <!-- Agregar más tarjetas individuales según sea necesario -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Segunda sección para "TUS MULTIRESERVAS" agrupadas por sala y piso -->
+  <div class="contenedor-general">
+    <div class="border rounded p-3 text-bg-dark mb-3 bg-dark text-white border-bottom d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <h4 class="mb-0">TUS MULTIRESERVAS</h4>
+      </div>
+      <div>
+        <label for="estadoMultiReserva" class="form-label me-2">Filtrar por estado:</label>
+        <select id="estadoMultiReserva" class="form-select" style="width: 200px;">
+          <option value="todas" selected>Todas</option>
+          <option value="cancelada">Cancelada</option>
+          <option value="proxima">Próxima</option>
+          <option value="en-curso">En Curso</option>
+          <option value="reprogramada">Reprogramada</option>
+        </select>
+      </div>
+    </div>
+  
+
+    
+    <!-- Contenedor de las multireservas agrupadas -->
+    <div class="contenedor-cards pt-4">
+        
+        <!-- Ejemplo de grupo de multireservas agrupadas -->
+        <div class="card mb-3 shadow" style="max-width: 100%;">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <app-card-mis-salas [prioridad]="'Alta'" [piso]="1" [habitacion]="2" [capacidad]="21"></app-card-mis-salas>
+            </div>
+            <div class="col-md-3">
+              <app-card-mis-salas [prioridad]="'Alta'" [piso]="2" [habitacion]="3" [capacidad]="20"></app-card-mis-salas>
+            </div>
+            <div class="col-md-3">
+              <app-card-mis-salas [prioridad]="'Alta'" [piso]="1" [habitacion]="2" [capacidad]="21"></app-card-mis-salas>
+            </div>
+          </div>
+          
+
+
+
+
+
+
+
+
+          
+            <div class="col-md-3 d-flex flex-column align-items-start justify-content-center gap-0 ">
+                <div class="list-group shadow">
+                  <div class="list-group-item d-flex gap-3 py-3" >
+                    <i class="bi bi-people"></i>
+                          <div class="d-flex gap-2 w-100 justify-content-between">
+                      <div>
+                        <h6 class="mb-0">Capacidad Total: 57</h6>
+                        <p class="mb-0 opacity-75">Sumatoria de capacidades </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item d-flex gap-3 py-3" >
+                    <i class="bi bi-star"></i>
+                     <div class="d-flex gap-2 w-100 justify-content-between">
+                      <div>
+                        <h6 class="mb-0">Prioridad: Alta</h6>
+                        <p class="mb-0 opacity-75">Prioridad Seleccionada</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item d-flex gap-3 py-3" ></div>
+                    <i class="bi bi-star"></i>
+                     <div class="d-flex gap-2 w-100 justify-content-between">
+                      <div>
+                        <h6 class="mb-0">Estado</h6>
+                        <p class="mb-0 opacity-75">Prioridad Seleccionada</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group-item d-flex gap-3 py-3 d-flex justify-content-center" >
+                    <button type="button" class="btn btn-danger">
+                      <i class="bi bi-trash"></i> <!-- Icono de eliminar -->
+                      Eliminar todo
+                  </button>
+                   
+                  </div>
+                </div>
+        </div>
+
+          
+        </div>
+      </div>
+      
+        
+
+  
+
+    
