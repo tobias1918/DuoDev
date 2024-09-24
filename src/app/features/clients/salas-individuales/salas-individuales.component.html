@@ -8,31 +8,74 @@
 
             <div class="filtros d-flex align-items-center" style="max-width: 90%;">
 
-                <div class="mb-3 flex-fill me-3">
-                    <label for="exampleFormControlInput1" class="form-label">Capacidad</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1"
-                        placeholder="Ingrese la capacidad">
-                </div>
+               
 
                 <div class="mb-3 flex-fill me-3">
                     <label for="select1" class="form-label">N° De Piso</label>
                     <select class="form-select" id="select1" aria-label="Seleccionar una opción">
-                        <option selected>Seleccionar una opción</option>
-                        <option value="0">0</option>
+                        <option selected value="0">Planta Baja</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
                 </div>
 
+            
+
                 <div class="mb-3 flex-fill me-3">
-                    <label for="select2" class="form-label">N° De Habitación</label>
+                    <label for="exampleFormControlInput1" class="form-label" >Capacidad</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Ingrese la capacidad">
+                </div>
+
+               
+                <div class="horario">
+                    <i class="bi bi-clock" style="position: relative;top: 8px;right: 8px;"></i>
+                <div class="mb-3 flex-fill ">
+                    <label for="select1" class="form-label" style="width: 100%;text-align: center;">Hora</label>
+                    <select class="form-select hora" id="select1" aria-label="Seleccionar una opción">
+                        <option selected>08</option>
+                        <option value="1">09</option>
+                        <option value="2">10</option>
+                        <option value="3">11</option>
+                        <option value="3">12</option>
+                        <option value="3">13</option>
+                        <option value="3">14</option>
+                        <option value="3">15</option>
+                        <option value="3">16</option>
+                        <option value="3">17</option>
+                    </select>
+                </div>
+                <div class="mb-3 flex-fill ">
+                    <label for="select1" class="form-label" style="width: 100%;text-align: center;">Minutos</label>
+                    <select class="form-select hora" id="select1" aria-label="Seleccionar una opción">
+                        <option selected>00</option>
+                        <option value="0">15</option>
+                        <option value="1">30</option>
+                        <option value="2">45</option>
+                    </select>
+                </div>
+                </div>
+
+                
+
+
+                <div class="mb-3 flex-fill me-3">
+                    <label for="select2" class="form-label">Duración</label>
                     <select class="form-select" id="select2" aria-label="Seleccionar una opción">
-                        <option selected>Seleccionar una opción</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                        <option value="1">15 min</option>
+                        <option value="2">30 min</option>
+                        <option selected value="3">1 h</option>
+                        <option value="4">2 hs</option>
+                    </select>
+                </div>
+                <div class="mb-3 flex-fill me-3">
+                    <label for="select2" class="form-label">Prioridad</label>
+                    <select class="form-select" id="select2" aria-label="Seleccionar una opción">
+                        <option value="1">Baja</option>
+                        <option selected value="1">Media</option>
+                        <option value="2">Alta</option>
+
                     </select>
                 </div>
 
@@ -48,15 +91,21 @@
 
 
         <div class="contenedor-cards pt-4" style="padding-bottom: 60px;height: auto;">
-            <app-card-sala [prioridad]="'Alta'" [piso]="2" [habitacion]="1" [capacidad]="26">
-            </app-card-sala>
 
-            <app-card-sala [prioridad]="'Alta'" [piso]="2" [habitacion]="1" [capacidad]="26">
+          <div *ngFor="let sala of salas; let i = index">
+            <app-card-sala 
+                [piso]="sala.piso" 
+                [nombreSala]="sala.nombreSala" 
+                [prioridad]="sala.prioridad" 
+                [capacidad]="sala.capacidad" 
+                [horaInicio]="sala.horaInicio" 
+                [horaFin]="sala.horaFin" 
+                [modalId]="'modal' + i"
+               >
             </app-card-sala>
-            <app-card-sala [prioridad]="'Alta'" [piso]="2" [habitacion]="1" [capacidad]="26">
-            </app-card-sala>
-            <app-card-sala [prioridad]="'Alta'" [piso]="2" [habitacion]="1" [capacidad]="26">
-            </app-card-sala>
+            </div>
+
+           
         </div>
 
 

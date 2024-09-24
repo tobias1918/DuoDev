@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './mis-reservas.component.css'
 })
 export class MisReservasComponent {
-
+  nombre='martin';
 }

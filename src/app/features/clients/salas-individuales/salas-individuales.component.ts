@@ -14,7 +14,40 @@ import { FormGroup } from '@angular/forms';
   styleUrl: './salas-individuales.component.css'
 })
 export class SalasIndividualesComponent implements OnInit {
-  salas: any[] = [];
+  salas: any[] = [
+      {
+        "nombreSala": "A1",
+        "piso": 1,
+        "horaInicio": "18:30",
+        "horaFin": "19:30",
+        "prioridad": "Media",
+        "capacidad": 25
+      },
+      {
+        "nombreSala": "A2",
+        "piso": 1,
+        "horaInicio": "18:30",
+        "horaFin": "19:30",
+        "prioridad": null,
+        "capacidad": 20
+      },
+      {
+        "nombreSala": "A3",
+        "piso": 1,
+        "horaInicio": "18:30",
+        "horaFin": "19:30",
+        "prioridad": null,
+        "capacidad": 18
+      },
+      {
+        "nombreSala": "A4",
+        "piso": 1,
+        "horaInicio": "18:30",
+        "horaFin": "19:30",
+        "prioridad": "Baja",
+        "capacidad": 28
+      }
+  ];
   numeroAsistentes: number=0;
   horario: string ='';
   prioridad: string ='';
@@ -31,6 +64,11 @@ export class SalasIndividualesComponent implements OnInit {
       console.log(`${this.numeroAsistentes+this.horario+this.prioridad}`)
     });
   }
+
+
+
+
+
 
   
 
