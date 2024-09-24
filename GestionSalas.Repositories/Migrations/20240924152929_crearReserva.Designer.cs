@@ -4,6 +4,7 @@ using GestionSalas.Repositories.ContextGS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionSalas.Repositories.Migrations
 {
     [DbContext(typeof(GestionSalasContext))]
-    partial class GestionSalasContextModelSnapshot : ModelSnapshot
+    [Migration("20240924152929_crearReserva")]
+    partial class crearReserva
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,10 +60,6 @@ namespace GestionSalas.Repositories.Migrations
                         .HasColumnName("state");
 
                     b.HasKey("idReserva");
-
-                    b.HasIndex("idSala");
-
-                    b.HasIndex("idUsuario");
 
                     b.ToTable("reservas", (string)null);
                 });
@@ -148,21 +146,6 @@ namespace GestionSalas.Repositories.Migrations
                     b.HasKey("idUser");
 
                     b.ToTable("usuarios", (string)null);
-                });
-
-            modelBuilder.Entity("GestionSalas.Entity.Entidades.Reserva", b =>
-                {
-                    b.HasOne("GestionSalas.Entity.Entidades.Sala", null)
-                        .WithMany()
-                        .HasForeignKey("idSala")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GestionSalas.Entity.Entidades.User", null)
-                        .WithMany()
-                        .HasForeignKey("idUsuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

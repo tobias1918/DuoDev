@@ -27,6 +27,7 @@ namespace GestionSalas.Repositories.ContextGS.Data
         public GestionSalasContext(DbContextOptions<GestionSalasContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Sala> Sala { get; set; }
+        public DbSet<Reserva> Reserva { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

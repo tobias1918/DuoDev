@@ -47,7 +47,8 @@ namespace GestionSalas.Repositories.Reposories.implementations
         {
             try
             {
-                return await _context.Sala.Where(s => !s.isDeleted).FirstOrDefaultAsync(s => s.idSala == idSala);
+                var sala = await _context.Sala.Where(s => !s.isDeleted).FirstOrDefaultAsync(s => s.idSala == idSala);
+                return sala;
 
             }
             catch(Exception ex)

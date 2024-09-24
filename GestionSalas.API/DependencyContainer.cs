@@ -18,9 +18,11 @@ namespace GestionSalas.API
 
             // Registro de repositorios
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IReservaRepository, ReservaRepository>();
 
             // Registro de servicios
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IReservaService, ReservaService>();
 
             services.AddScoped<ISalaRepository, SalaRepository>();
             services.AddScoped<ISalaService, SalaService>();
