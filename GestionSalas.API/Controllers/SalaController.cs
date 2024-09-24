@@ -72,7 +72,7 @@ namespace GestionSalas.API.Controllers
         }
 
         [HttpPut("ActualizarSala")]
-        public async Task<ActionResult> UpdateSala([FromBody] UpdateSalaDTO salaDTO)
+        public async Task<ActionResult> UpdateSala([FromBody] SalaDTO salaDTO)
         {
             if (salaDTO.idSala == 0 || salaDTO == null)
             {

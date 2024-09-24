@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace GestionSalas.Repositories.Reposories.implementations
 {
@@ -61,7 +62,7 @@ namespace GestionSalas.Repositories.Reposories.implementations
             try
             {
 
-                var sala = await GetSalaId(idSala);
+                Sala sala = await _context.Sala.FirstOrDefaultAsync(s => s.idSala == idSala);
                 if(sala != null)
                 {
                     sala.isDeleted = true;

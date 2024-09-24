@@ -82,7 +82,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
             var users = await _userRepository.GetAllUsers();
 
             foreach (var user in users)
-            {
+            {   
                 
                 var userSalida = new User
                 {
