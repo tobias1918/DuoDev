@@ -1,43 +1,21 @@
-<div class="container px-4 py-5" id="custom-cards">
-    <h2 class="pb-2 border-bottom">Selecciona la reserva</h2>
+<div class="container px-4 pt-5 mt-3" id="custom-cards">
+    <h2 class="pb-2 border-bottom">Selecciona el tipo de reserva</h2>
 
-    <div class="row row-cols-1 row-cols-lg-1 align-items-stretch g-4 py-5">
-
-            <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                    style="background-image: url('');background-size: cover;">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+    <div class="row row-cols-1 row-cols-lg-2 align-items-stretch g-4 py-5">
+        
+            <div class="col" >
+                <div routerLink="salas-individuales"  class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                    style="background-image: url('');background-size: cover;cursor: pointer;">
+                   
+                    <div class="d-flex flex-column p-5 pt-0 pb-0 text-white text-shadow-1">
+                        <img src="assets/images/Management-image-3.svg" class="img-fluid" style="height: 460px;" alt="">
                         <div style="display: flex;justify-content: space-between;align-items: center;">
-                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" >Salas <br> Individuales</h3>
-                        <form [formGroup]="salasIndividualesForm" (ngSubmit)="onSubmit()"  style="width: 50%;">
-                            <div class="mb-3">
-                              <label for="exampleInputEmail1" class="form-label">Numero de Asistentes</label>
-                              <input  formControlName="numeroAsistentes" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <select formControlName="horario" class="form-select" aria-label="Default select example">
-                                    <option value="7:30/8:00">7:30/8:00</option>
-                                    <option value="8:00/8:30">8:00/8:30</option>
-                                    <option value="8:30/9:00">8:30/9:00</option>
-                                  </select>
-                            </div>
-                            <div class="mb-3">
-                                <select  formControlName="prioridad" class="form-select" aria-label="Default select example">
-                                    <option value="baja">baja</option>
-                                    <option value="media">Media</option>
-                                    <option value="alta">Alta</option>
-                                  </select>
-                            </div>
-                           
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                          </form>
+                        <h3 class=" mt-5 mb-2 display-6 lh-1 fw-bold" >Salas <br> Individuales</h3>
+                        
                         </div>
-                        <ul class="d-flex list-unstyled mt-auto">
+                        <ul class="d-flex list-unstyled mt-0">
                             <i class="bi bi-person"></i>
-                            <li class="d-flex align-items-center me-3">
-                                <svg class="bi me-2" width="1em" height="1em">
-                                    <use xlink:href="#geo-fill" />
-                                </svg>
+                            <li class="d-flex align-items-center">
                                 <small>Capacidad maxima 30 Personas</small>
                             </li>
                            
@@ -49,46 +27,21 @@
 
        
             <div class="col" >
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                    style="background-image: url('');background-size: cover;">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                <div routerLink="salas-multiples"  class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+                    style=" cursor: pointer;background-image: url('');background-size: cover;">
+                    <div class="d-flex flex-column p-5 pt-0 pb-3 text-white text-shadow-1">
+                        <img src="assets/images/Management-image-5.svg" class="img-fluid" style="height: 460px;" alt="">
                         <div style="display: flex;justify-content: space-between;align-items: center;">
-                            <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" >Salas <br> Multiples</h3>
-                            <form style="width: 50%;">
-                                <div class="mb-3">
-                                  <label for="exampleInputEmail1" class="form-label">Numero de Asistentes</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                </div>
-                                <div class="mb-3">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Horarios</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                      </select>
-                                </div>
-                                <div class="mb-3">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Prioridad</option>
-                                        <option value="1">baja</option>
-                                        <option value="2">Media</option>
-                                        <option value="3">Alta</option>
-                                      </select>
-                                </div>
-                               
-                                <button type="submit" routerLink="/reserva/salas-multiples" class="btn btn-primary">Submit</button>
-                              </form>
+                            <h3 class=" mt-5 mb-2 display-6 lh-1 fw-bold"  >Salas <br> Multiples</h3>
+                            
                             </div>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <i class="bi bi-people"></i>
-                            <li class="d-flex align-items-center me-3">
-                                <svg class="bi me-2" width="1em" height="1em">
-                                    <use xlink:href="#geo-fill" />
-                                </svg>
-                                <small>Capacidad minima > 30 personas </small>
-                            </li>
-                           
-                        </ul>
+                            <ul class="d-flex list-unstyled mt-0">
+                                <i class="bi bi-person"></i>
+                                <li class="d-flex align-items-center">
+                                    <small>Capacidad minima > 30 personas</small>
+                                </li>
+                               
+                            </ul>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,37 @@
+<!-- Button trigger modal --> 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#' + modalId">
+    Editar Sala
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" [id]="modalId" tabindex="-1" aria-labelledby="modalEditUserLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h1 class="fw-bold mb-0 fs-2">Editar Sala</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body p-5 pt-0">
+          <form [formGroup]="editSalaForm" (ngSubmit)="guardarCambios()"> 
+            <input type="hidden" formControlName="id" value="usuario.id">
+            
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="floatingName" formControlName="nombreSala" placeholder="Nombre">
+              <label for="floatingName">Nombre Sala</label>
+            </div>
+            
+            <div class="form-floating mb-3">
+              <input type="number" class="form-control rounded-3" id="floatingSurname" formControlName="capacidad" placeholder="Apellido">
+              <label for="floatingSurname">Capacidad</label>
+            </div>
+
+             
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Guardar Cambios</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

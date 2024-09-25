@@ -1,0 +1,62 @@
+<main class="container">
+    <div class="d-flex align-items-center p-3 mt-5 bg-purple rounded shadow-lg mt-3 p-5 text-bg-dark">
+        <i class="bi bi-people" style="font-size: 35px;margin-left: 10px;"></i> <!-- Icono de personas -->
+      <h1 class="text-body-principal" style="font-size: 35px;">&nbsp; Panel de usuarios</h1>
+    </div>
+  
+
+  
+    <div class="my-3 p-3 bg-body rounded shadow-lg">
+      <h6 class="border-bottom pb-2 mb-0">Usuarios</h6>
+      <!-- usuario -->
+      <div *ngFor="let usuario of usuarios; let i = index" class="d-flex text-body-secondary pt-3" >
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava{{i+1}}-bg.webp" alt="" height="40" width="40">
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100" style="padding-left: 30px;">
+          <div class="d-flex justify-content-between">
+            <strong class="text-gray-dark">Nombre</strong>
+          </div>
+          <span class="d-block">{{usuario.nombre}}</span>
+        </div>
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+          <div class="d-flex justify-content-between">
+            <strong class="text-gray-dark">Apellido</strong>
+          </div>
+          <span class="d-block">{{usuario.apellido}}</span>
+        </div>
+        
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong class="text-gray-dark">Email</strong>
+            </div>
+            <span class="d-block">{{usuario.email}}</span>
+          </div>
+        
+        <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+              <strong class="text-gray-dark">Rol</strong>
+            </div>
+            <span class="d-block">{{usuario.rol}}</span>
+          </div>
+          <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+            <div class="d-flex justify-content-between">
+                <strong></strong>
+
+              <div class="d-flex gap-2">
+              <app-modal-edit-usuario [usuario]="usuario"  [modalId]="'modal' + i"></app-modal-edit-usuario>
+              <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+
+            </div>
+
+              
+            </div>
+          </div>
+          
+      </div>
+     
+      
+    
+      <small class="d-block text-end mt-3">
+        <a href="#">All suggestions</a>
+      </small>
+    </div>
+  </main>

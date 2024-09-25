@@ -1,0 +1,44 @@
+<!-- Button trigger modal --> 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#' + modalId">
+    Editar Usuario
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" [id]="modalId" tabindex="-1" aria-labelledby="modalEditUserLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h1 class="fw-bold mb-0 fs-2">Editar Usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body p-5 pt-0">
+          <form [formGroup]="editUserForm" (ngSubmit)="guardarCambios()"> 
+            <input type="hidden" formControlName="id" value="usuario.id">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="floatingName" formControlName="nombre" placeholder="Nombre">
+              <label for="floatingName">Nombre</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control rounded-3" id="floatingSurname" formControlName="apellido" placeholder="Apellido">
+              <label for="floatingSurname">Apellido</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control rounded-3" id="floatingEmail" formControlName="email" placeholder="Email">
+              <label for="floatingEmail">Email</label>
+            </div>
+            <label for="floatingSelected" class="mx-2">Rol</label>
+              <select class="form-select mb-3" id="floatingSelected"  aria-label="Default select example">
+                <option value="usuario">Usuario</option>
+                <option value="admin">Admin</option>
+                <option value="read">Read</option>
+              </select>
+             
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Guardar Cambios</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  

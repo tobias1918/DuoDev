@@ -1,21 +1,22 @@
-
-<div class="card border-0 rounded-4">
+<div style="display: flex;align-items: center;justify-content: center;height: 100vh;">
+<div style="width: 800px;">
+<div class="card  border-dark rounded-4 shadow p-3">
     <div class="card-body p-3 p-md-4 p-xl-5">
       <div class="row">
         <div class="col-12">
           <div class="mb-4">
-            <h3>Registrarse</h3>
-            <p>Ya tienes cuenta? <a (click)="onLoginClick()" style="cursor: pointer;color: var(--bs-primary);">Inicia sesión</a></p>
+            <h3>Editar Perfil</h3>
+            
           </div>
         </div>
       </div>
-      <form [formGroup]="formRegister" (ngSubmit)="registrarse()">
+      <form [formGroup]="formUpdate" (ngSubmit)="registrarse()">
         <div class="row gy-3 overflow-hidden">
           <div class="col-12 col-md-6">
             <div class="form-floating mb-3">
               <input type="text" formControlName="nombre" class="form-control" 
-              [class.is-valid]="this.formRegister.get('nombre')?.valid" 
-              [class.is-invalid]="this.formRegister.get('nombre')?.invalid && this.formRegister.get('nombre')?.touched" 
+              [class.is-valid]="this.formUpdate.get('nombre')?.valid" 
+              [class.is-invalid]="this.formUpdate.get('nombre')?.invalid && this.formUpdate.get('nombre')?.touched" 
               name="first_name" id="first_name" placeholder="Nombre"
                 required>
                 <div class="invalid-feedback">
@@ -27,8 +28,8 @@
           <div class="col-12 col-md-6">
             <div class="form-floating mb-3">
               <input type="text" formControlName="apellido" class="form-control" 
-              [class.is-valid]="this.formRegister.get('apellido')?.valid" 
-              [class.is-invalid]="this.formRegister.get('apellido')?.invalid && this.formRegister.get('apellido')?.touched" 
+              [class.is-valid]="this.formUpdate.get('apellido')?.valid" 
+              [class.is-invalid]="this.formUpdate.get('apellido')?.invalid && this.formUpdate.get('apellido')?.touched" 
               name="last_name" id="last_name" placeholder="Apellido"
                 required>
                 <div class="invalid-feedback">
@@ -40,8 +41,8 @@
           <div class="col-12">
             <div class="form-floating mb-3">
               <input type="email" formControlName="email" class="form-control"
-              [class.is-valid]="this.formRegister.get('email')?.valid" 
-              [class.is-invalid]="this.formRegister.get('email')?.invalid && this.formRegister.get('email')?.touched" 
+              [class.is-valid]="this.formUpdate.get('email')?.valid" 
+              [class.is-invalid]="this.formUpdate.get('email')?.invalid && this.formUpdate.get('email')?.touched" 
               name="email" id="email" placeholder="name@example.com"
                 required>
                 <div class="invalid-feedback">
@@ -54,8 +55,8 @@
           <div class="col-12">
             <div class="form-floating mb-3">
               <input type="password" formControlName="password" class="form-control"
-                [class.is-valid]="this.formRegister.get('password')?.valid && this.formRegister.get('password')?.touched"
-                [class.is-invalid]="this.formRegister.get('password')?.invalid && this.formRegister.get('password')?.touched"
+                [class.is-valid]="this.formUpdate.get('password')?.valid && this.formUpdate.get('password')?.touched"
+                [class.is-invalid]="this.formUpdate.get('password')?.invalid && this.formUpdate.get('password')?.touched"
                 name="password" id="password" placeholder="Contraseña" required>
               
               <label for="password" class="form-label">Contraseña</label>
@@ -65,14 +66,14 @@
           <div class="col-12">
             <div class="form-floating mb-3">
               <input type="password" formControlName="confirmacionPassword" class="form-control"
-                [class.is-valid]="!this.formRegister.get('confirmacionPassword')?.hasError('mismatch') && this.formRegister.get('confirmacionPassword')?.touched"
-                [class.is-invalid]="this.formRegister.get('confirmacionPassword')?.hasError('mismatch') && this.formRegister.get('confirmacionPassword')?.touched"
+                [class.is-valid]="!this.formUpdate.get('confirmacionPassword')?.hasError('mismatch') && this.formUpdate.get('confirmacionPassword')?.touched"
+                [class.is-invalid]="this.formUpdate.get('confirmacionPassword')?.hasError('mismatch') && this.formUpdate.get('confirmacionPassword')?.touched"
                 name="confirm_password" id="confirm_password"
                 placeholder="Confirmar Contraseña" required>
-              <div *ngIf="this.formRegister.get('confirmacionPassword')?.hasError('mismatch') && this.formRegister.get('confirmacionPassword')?.touched" class="invalid-feedback">
+              <div *ngIf="this.formUpdate.get('confirmacionPassword')?.hasError('mismatch') && this.formUpdate.get('confirmacionPassword')?.touched" class="invalid-feedback">
                 Confirme la contraseña. Las contraseñas no coinciden.
               </div>
-              <div *ngIf="!this.formRegister.get('confirmacionPassword')?.hasError('mismatch') && this.formRegister.get('confirmacionPassword')?.touched" class="valid-feedback">
+              <div *ngIf="!this.formUpdate.get('confirmacionPassword')?.hasError('mismatch') && this.formUpdate.get('confirmacionPassword')?.touched" class="valid-feedback">
                 Las contraseñas coinciden.
               </div>
               <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
@@ -81,7 +82,7 @@
           
           <div class="col-12">
             <div class="d-grid">
-              <button [disabled]="this.formRegister.invalid" class="btn btn-primary btn-lg" type="submit">Registrarse</button>
+              <button [disabled]="this.formUpdate.invalid" class="btn btn-primary btn-lg" type="submit">Registrarse</button>
             </div>
           </div>
         </div>
@@ -90,4 +91,7 @@
     </div>
   </div>
 
- 
+</div>
+
+</div>
+

@@ -12,20 +12,5 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class ReservasComponent {
 
-  salasIndividualesForm: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.salasIndividualesForm = this.fb.group({
-      numeroAsistentes: [''],
-      horario: [''],
-      prioridad: ['']
-    });
-  }
-
-  onSubmit() {
-    console.log(this.salasIndividualesForm.value)
-    const formData = this.salasIndividualesForm.value;
-    this.router.navigate(['/reserva/salas-individuales'], { queryParams: formData });
-  }
-
 
 }

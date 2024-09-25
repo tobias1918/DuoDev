@@ -30,14 +30,14 @@
             </a>
           </li>
           <li>
-            <a class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='panelUsuarios'}"
+            <a routerLink="panel-usuario" class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='panelUsuarios'}"
               (click)="onOption('panelUsuarios')" aria-current="page">
               <i class="bi bi-person-vcard"></i>
               Panel Usuarios (admin)
             </a>
           </li>
           <li>
-            <a class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='panelSalas'}"
+            <a routerLink="panel-salas" class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='panelSalas'}"
               (click)="onOption('panelSalas')" aria-current="page">
               <i class="bi bi-gear"></i>
               Panel Salas (admin)
@@ -52,7 +52,7 @@
             <strong>User</strong>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+            <li><a class="dropdown-item" routerLink="editar-perfil">Editar Perfil</a></li>
             <li><a class="dropdown-item" routerLink="perfil" >Perfil</a></li>
             <li>
               <hr class="dropdown-divider">

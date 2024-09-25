@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterService } from './register.service';
-import { IProduct } from '../models/Product.model';
 import { IUsuario } from '../models/usuario.model';
+import { AccesoService } from '../services/acceso.service';
+import { Router } from '@angular/router';
+import { Usuario } from '../models/Usuario';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +15,10 @@ import { IUsuario } from '../models/usuario.model';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
+
+  private accesoService=inject(AccesoService);
+  private router = inject(Router);
+
 
   //LOGICA PARA ENVIAR FUNCIONES ENTRE COMPONENTES
   @Output() switchToLogin = new EventEmitter<void>();
@@ -80,50 +86,28 @@ export class RegisterComponent implements OnInit {
   }
 
 
-listUsuarios: any[] = [
-  {
-    nombre: 'Tobias',
-    apellido: 'Molina',
-    email: 'tobias@gmail.com',
-    password: 'password',
-    confirmacionPassword: 'password',
-  },
-  {
-    nombre: 'Franco',
-    apellido: 'Lopez',
-    email: 'franco@gmail.com',
-    password: 'password2',
-    confirmacionPassword: 'password2',
-  },
-  {
-    nombre: 'Uriel',
-    apellido: 'Gonzalez',
-    email: 'uriel@gmail.com',
-    password: 'password3',
-    confirmacionPassword: 'password3',
-  },
-];
-
 
 
 
 registrarse() {
-  const usuario: any = {
+  if(this.formRegister.invalid)return;
+  const objeto:Usuario = {
     nombre: this.formRegister.get('nombre')?.value,
     apellido: this.formRegister.get('apellido')?.value,
     email: this.formRegister.get('email')?.value,
     password: this.formRegister.get('password')?.value,
   };
 
-  console.log(usuario);
-  this.listUsuarios.push(usuario);
-  this.formRegister.reset();
+  this.accesoService.registrarse(objeto).subscribe({
+    next:(data)=>{
+      if(data.isSuccess){
+        this.router.navigate(["/signup"])
+      }else{
+        alert("No se pudo registrar");
+      }
+    }
+  })
 }
-
-
-
-
-
 
 
 
