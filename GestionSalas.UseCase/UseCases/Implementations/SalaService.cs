@@ -1,4 +1,4 @@
-﻿using GestionSalas.Entity.DTOs;
+﻿using GestionSalas.Entity.DTOs.SalaDTOs;
 using GestionSalas.Entity.Entidades;
 using GestionSalas.Repositories.Reposories.interfaces;
 using GestionSalas.UseCase.UseCases.Interfaces;
@@ -25,7 +25,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
             {
                 var sala = new Sala
                 {
-                    nameSala = salaDTO.nameSala,
+                    nameSala = salaDTO.nameSala.ToLower(),
                     codSala = salaDTO.codSala,
                     floorSala = salaDTO.floorSala,
                     capacitySala = salaDTO.capacitySala,
@@ -40,7 +40,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
 
         }
 
-        public async Task UpdateSala(SalaDTO salaDTO)
+        public async Task UpdateSala(UpdateSalaDTO salaDTO)
         {
             try
             {
@@ -52,16 +52,16 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                     {
                         
                         if (salaDTO.nameSala != null)
-                            sala.nameSala = salaDTO.nameSala;
+                            sala.nameSala = salaDTO.nameSala.ToLower();
 
                         if (salaDTO.codSala != null)
                             sala.codSala = salaDTO.codSala;
 
                         if (salaDTO.floorSala != null)
-                            sala.floorSala = salaDTO.floorSala;
+                            sala.floorSala = (byte)salaDTO.floorSala;
 
                         if (salaDTO.capacitySala != null)
-                            sala.capacitySala = salaDTO.capacitySala;
+                            sala.capacitySala = (byte)salaDTO.capacitySala;
                         
                     }
                    
@@ -79,7 +79,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
         {
             try
             {
-                _salaRepository.DeleteSala(idSala);
+                await _salaRepository.DeleteSala(idSala);
             }
             catch (Exception ex)
             {

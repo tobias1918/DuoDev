@@ -119,24 +119,19 @@ namespace GestionSalas.Repositories.Reposories.implementations
         {
             try
             {
-                Reserva existingReserva = await _context.Reserva
-                    .FirstOrDefaultAsync(r => r.idReserva == reserva.idReserva);
 
-                if (existingReserva == null)
+                //Verifico si ya existe una endidad con el mismo id en el contexto local
+                //si existe la desvinculamos del contexto para evitar el error de duplicado
+
+                var existingReserv = _context.Reserva.Local.FirstOrDefault(u => u.idReserva == reserva.idSala);
+                if (existingReserv != null)
                 {
-                    throw new Exception("Reserva no encontrada");
+                    //Desvinculo la entidad rastreada en en paso anterior
+                    _context.Entry(existingReserv).State = EntityState.Detached;
                 }
 
-                // Actualizar los campos necesarios
-                existingReserva.idUsuario = reserva.idUsuario;
-                existingReserva.idSala = reserva.idSala;
-                existingReserva.priority = reserva.priority;
-                existingReserva.horaInicio = reserva.horaInicio;
-                existingReserva.horaFin = reserva.horaFin;
-                existingReserva.state = reserva.state;
-
-                await UpdateReserva(existingReserva);
-                await SaveChangesAsync();
+                _context.Reserva.Update(reserva);
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {

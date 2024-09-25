@@ -18,6 +18,6 @@ namespace GestionSalas.Entity.Entidades
         public DateTime horaInicio { get; set; }
         public DateTime horaFin { get; set; }
         public string state { get; set; } //En curso,Reservado,Finalizado,Cancelado
-
+        
     }
 }

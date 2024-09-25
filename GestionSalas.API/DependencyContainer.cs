@@ -16,6 +16,10 @@ namespace GestionSalas.API
             services.AddDbContext<GestionSalasContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Connection1")));
 
+            //Encripta la contraseña y genera el token
+            services.AddSingleton<Utilidades>();
+
+
             // Registro de repositorios
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IReservaRepository, ReservaRepository>();

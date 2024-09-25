@@ -1,6 +1,8 @@
-using GestionSalas.Entity.DTOs;
+using GestionSalas.Entity.DTOs.UserDTOs;
+using GestionSalas.Entity.Entidades;
 using GestionSalas.UseCase.UseCases.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 
 namespace GestionSalas.API.Controllers
 {
@@ -9,10 +11,12 @@ namespace GestionSalas.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly Utilidades _utilidades;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, Utilidades utilidades)
         {
             _userService = userService;
+            _utilidades = utilidades;
         }
 
         // GET: api/user
@@ -60,7 +64,11 @@ namespace GestionSalas.API.Controllers
             }
 
             try
-            {
+            { 
+                // encripto la contrasena antes de entrar adentro de las capas
+                var hasPassword = _utilidades.EncriptarSHA256(userDTO.password);
+                userDTO.password = hasPassword;
+
                 await _userService.CreateUser(userDTO);
                 return CreatedAtAction(nameof(GetById), new { id = userDTO.idUser }, userDTO);
             }
@@ -73,16 +81,23 @@ namespace GestionSalas.API.Controllers
 
 
         [HttpPut("ActualizarUser")]
-        public async Task<ActionResult> Update(int id, [FromBody] UserDTO userDTO)
+        public async Task<ActionResult> Update([FromBody] UpdateUserDTO updateUserDTO)
         {
-            if (userDTO == null || id != userDTO.idUser)
+            if (updateUserDTO == null || updateUserDTO.idUser == 0)
             {
                 return BadRequest("Cliente no válido.");
             }
 
             try
             {
-                await _userService.UpdateUser(userDTO);
+                if (updateUserDTO.password != null) {
+                    //si la contrasena viene en el dto la has
+                    //y la envio has
+                    var hasPassword = _utilidades.EncriptarSHA256(updateUserDTO.password);
+                    updateUserDTO.password = hasPassword;
+                }
+                   
+                await _userService.UpdateUser(updateUserDTO);
                 return NoContent();
             }
             catch (Exception ex)
@@ -112,10 +127,36 @@ namespace GestionSalas.API.Controllers
         {
             try
             {
+                //encripto la contrasena antes de enviar los datos hasta la capa repositories
+                //porque luego no lo podria hacer
+                var hasPassword = _utilidades.EncriptarSHA256(loginRequest.password);
+                loginRequest.password = hasPassword;
+
                 var user = await _userService.VerifyLogin(loginRequest);
+
+                //si de la busqueda en el backend encontramos nuestro usuario y coinciden las credenciales, 
+                //generamos el token
+                if (user != null) { return StatusCode(StatusCodes.Status200OK, new {isSuccess = true, token = _utilidades
+                .GenerarJWT(user)
+                }); }
 
                 // Aquí puedes devolver el usuario o algún otro tipo de respuesta
                 return Ok(user); // Devolver el objeto User o cualquier otra información relevante
+            }
+            catch (Exception ex)
+            {
+                // Devolver el error como respuesta
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("ValidarToken")]
+        public async Task<IActionResult> ValidarToken([FromQuery]string token)
+        {
+            try
+            {
+               bool respuesta = _utilidades.ValidationToken(token);
+                return StatusCode(StatusCodes.Status200OK, new {isSuccess = respuesta});
             }
             catch (Exception ex)
             {

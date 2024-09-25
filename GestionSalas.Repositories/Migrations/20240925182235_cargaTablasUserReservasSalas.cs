@@ -5,28 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GestionSalas.Repositories.Migrations
 {
-    public partial class crearReserva : Migration
+    public partial class cargaTablasUserReservasSalas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "reservas",
-                columns: table => new
-                {
-                    id_reserva = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    id_usuario = table.Column<int>(type: "int", nullable: false),
-                    id_sala = table.Column<int>(type: "int", nullable: false),
-                    priority = table.Column<byte>(type: "tinyint", nullable: false),
-                    hora_inicio = table.Column<DateTime>(type: "datetime", nullable: false),
-                    hora_fin = table.Column<DateTime>(type: "datetime", nullable: false),
-                    state = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_reservas", x => x.id_reserva);
-                });
-
             migrationBuilder.CreateTable(
                 name: "salas",
                 columns: table => new
@@ -45,7 +27,7 @@ namespace GestionSalas.Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "usuarios",
+                name: "users",
                 columns: table => new
                 {
                     id_user = table.Column<int>(type: "int", nullable: false)
@@ -54,13 +36,53 @@ namespace GestionSalas.Repositories.Migrations
                     surname = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     password = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
                     email = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
-                    rol = table.Column<bool>(type: "bit", nullable: false),
+                    rol = table.Column<byte>(type: "tinyint", nullable: false),
                     is_deleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_usuarios", x => x.id_user);
+                    table.PrimaryKey("PK_users", x => x.id_user);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "reservas",
+                columns: table => new
+                {
+                    id_reserva = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_usuario = table.Column<int>(type: "int", nullable: false),
+                    id_sala = table.Column<int>(type: "int", nullable: false),
+                    priority = table.Column<byte>(type: "tinyint", nullable: false),
+                    hora_inicio = table.Column<DateTime>(type: "datetime", nullable: false),
+                    hora_fin = table.Column<DateTime>(type: "datetime", nullable: false),
+                    state = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_reservas", x => x.id_reserva);
+                    table.ForeignKey(
+                        name: "FK_reservas_salas_id_sala",
+                        column: x => x.id_sala,
+                        principalTable: "salas",
+                        principalColumn: "id_sala",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_reservas_users_id_usuario",
+                        column: x => x.id_usuario,
+                        principalTable: "users",
+                        principalColumn: "id_user",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_reservas_id_sala",
+                table: "reservas",
+                column: "id_sala");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_reservas_id_usuario",
+                table: "reservas",
+                column: "id_usuario");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -72,7 +94,7 @@ namespace GestionSalas.Repositories.Migrations
                 name: "salas");
 
             migrationBuilder.DropTable(
-                name: "usuarios");
+                name: "users");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace GestionSalas.Repositories.Reposories.implementations
     public class UserRepository : IUserRepository
     {
         protected readonly GestionSalasContext _context;
-
+        
         public UserRepository(GestionSalasContext context)
         {
             _context = context;
@@ -95,8 +95,22 @@ namespace GestionSalas.Repositories.Reposories.implementations
         {
             try
             {
+                
+                //Verifico si ya existe una endidad con el mismo id en el contexto local
+                //si existe la desvinculamos del contexto para evitar el error de duplicado
+
+                var existingUser = _context.Users.Local.FirstOrDefault(u => u.idUser == user.idUser);
+                if (existingUser != null)
+                {
+                    //Desvinculo la entidad rastreada en en paso anterior
+                    _context.Entry(existingUser).State = EntityState.Detached;
+                }
+
+
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
+
+               
             }
             catch (Exception ex)
             {

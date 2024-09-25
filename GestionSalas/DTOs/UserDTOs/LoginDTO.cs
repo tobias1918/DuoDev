@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionSalas.Entity.DTOs
+namespace GestionSalas.Entity.DTOs.UserDTOs
 {
     public class LoginDTO
     {

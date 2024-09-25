@@ -1,5 +1,7 @@
-﻿using GestionSalas.Entity.DTOs;
+﻿using GestionSalas.Entity.DTOs.ReservaDTOs;
+using GestionSalas.Entity.DTOs.SalaDTOs;
 using GestionSalas.Entity.Entidades;
+using GestionSalas.Repositories.Reposories.implementations;
 using GestionSalas.Repositories.Reposories.interfaces;
 using GestionSalas.UseCase.UseCases.Interfaces;
 using System;
@@ -39,19 +41,27 @@ namespace GestionSalas.UseCase.UseCases.Implementations
             }
         }
 
-        public async Task UpdateReserva(ReservaDTO reservaDTO)
+        public async Task UpdateReserva(UpdateReservaDTO reservaDTO)
         {
             try
             {
-                var reserva = await _reservaRepository.GetReservaId(reservaDTO.idReserva);
 
-                if (reserva != null)
+                if (reservaDTO.idSala != 0 && reservaDTO != null)
                 {
-                    reserva.idUsuario = reservaDTO.idUsuario;
-                    reserva.idSala = reservaDTO.idSala;
-                    reserva.priority = reservaDTO.priority;
-                    reserva.horaInicio = reservaDTO.horaInicio;
-                    reserva.horaFin = reservaDTO.horaFin;
+                    var reserva = await _reservaRepository.GetReservaId(reservaDTO.idReserva);
+                    if (reserva != null)
+                    {
+
+                        if (reservaDTO.horaInicio != null)
+                            reserva.horaInicio = (DateTime)reservaDTO.horaInicio;
+
+                        if (reservaDTO.horaFin != null)
+                            reserva.horaFin = (DateTime)reservaDTO.horaInicio;
+
+                        if (reservaDTO.state != null)
+                            reserva.state = reservaDTO.state.ToLower();
+
+                    }
 
                     await _reservaRepository.UpdateReserva(reserva);
                 }

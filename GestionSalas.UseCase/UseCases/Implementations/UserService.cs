@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GestionSalas.Entity.DTOs;
+using GestionSalas.Entity.DTOs.UserDTOs;
 using GestionSalas.Entity.Entidades;
 using GestionSalas.Repositories.Reposories.implementations;
 using GestionSalas.Repositories.Reposories.interfaces;
@@ -26,16 +26,16 @@ namespace GestionSalas.UseCase.UseCases.Implementations
             var user = new User
             {
                 idUser = userDTO.idUser,
-                name = userDTO.name,
-                surname = userDTO.surname,
-                email = userDTO.email,
+                name = userDTO.name.ToLower(),
+                surname = userDTO.surname.ToLower(),
+                email = userDTO.email.ToLower(),
                 password = userDTO.password,
             };
        
             await _userRepository.CreateUser(user);
         }
 
-        public async Task UpdateUser(UserDTO userDTO)
+        public async Task UpdateUser(UpdateUserDTO userDTO)
         {
             if (userDTO.idUser != 0 && userDTO != null)
             {
@@ -44,19 +44,17 @@ namespace GestionSalas.UseCase.UseCases.Implementations
 
                 if (user != null)
                 {
-                    if (userDTO.name != null)
-                        user.name = userDTO.name;
+                    if (userDTO.name != null) user.name = userDTO.name.ToLower();
 
-                    if (userDTO.surname != null)
-                        user.surname = userDTO.surname;
+                    if (userDTO.surname != null) user.surname = userDTO.surname.ToLower();
 
-                    if (userDTO.email != null)
-                        user.email = userDTO.email;
+                    if (userDTO.email != null) user.email = userDTO.email.ToLower();
 
-                    if (userDTO.password != null)
-                        user.password = userDTO.password;
+                    if (userDTO.password != null) user.password = userDTO.password;
+
+                    if (userDTO.rol != null) user.rol = (byte)userDTO.rol;
                 }
-
+                await _userRepository.UpdateUser(user);
             }
         }
         public async Task DeleteUser(int idUser)
@@ -104,7 +102,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
         {
             var user = new User
             {
-                email = loginDTO.email,
+                email = loginDTO.email.ToLower(),
                 password = loginDTO.password,
             };
             return await _userRepository.VerifyLogin(user);

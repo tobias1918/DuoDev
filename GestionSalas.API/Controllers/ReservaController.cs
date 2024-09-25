@@ -1,4 +1,5 @@
-﻿using GestionSalas.Entity.DTOs;
+﻿using GestionSalas.Entity.DTOs.ReservaDTOs;
+using GestionSalas.Entity.DTOs.UserDTOs;
 using GestionSalas.Entity.Entidades;
 using GestionSalas.UseCase.UseCases.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -93,17 +94,25 @@ namespace GestionSalas.API.Controllers
         }
 
         // PUT: api/Reserva/{id}
-        [HttpPut("updateReserva/{id}")]
-        public async Task<ActionResult> UpdateReserva(int id, [FromBody] ReservaDTO reservaDTO)
+        [HttpPut("updateReserva")]
+        public async Task<ActionResult> UpdateReserva([FromBody] UpdateReservaDTO updateReservaDTO)
         {
             try
             {
-                if (id != reservaDTO.idReserva)
+                if (updateReservaDTO == null || updateReservaDTO.idReserva == 0)
                 {
-                    return BadRequest("El ID de la reserva no coincide");
+                    return BadRequest("Reserva no válida.");
+                }
+                else if (updateReservaDTO.idSala == 0)
+                {
+                    return BadRequest("Sala no válida.");
+                }
+                else if (updateReservaDTO.idUsuario == 0)
+                {
+                    return BadRequest("Usuario no válida.");
                 }
 
-                await _reservaService.UpdateReserva(reservaDTO);
+                await _reservaService.UpdateReserva(updateReservaDTO);
 
                 return NoContent();
             }

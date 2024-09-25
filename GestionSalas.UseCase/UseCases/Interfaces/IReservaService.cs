@@ -1,4 +1,4 @@
-﻿using GestionSalas.Entity.DTOs;
+﻿using GestionSalas.Entity.DTOs.ReservaDTOs;
 using GestionSalas.Entity.Entidades;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace GestionSalas.UseCase.UseCases.Interfaces
     {
         Task CreateReserva(ReservaDTO reservaDTO);
         Task DeleteReserva(int idReserva);
-        Task UpdateReserva(ReservaDTO reservaDTO);
+        Task UpdateReserva(UpdateReservaDTO reservaDTO);
         Task<Reserva> GetReservaId(int idReserva);
         Task<List<Reserva>> GetAllReservas();
         Task SaveChangesAsync();

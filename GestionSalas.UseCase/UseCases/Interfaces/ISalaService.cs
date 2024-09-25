@@ -1,4 +1,4 @@
-﻿using GestionSalas.Entity.DTOs;
+﻿using GestionSalas.Entity.DTOs.SalaDTOs;
 using GestionSalas.Entity.Entidades;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace GestionSalas.UseCase.UseCases.Interfaces
     {
         Task CreateSala(SalaDTO sala);
         Task DeleteSala(int idSala);
-        Task UpdateSala(SalaDTO sala);
+        Task UpdateSala(UpdateSalaDTO sala);
         Task<Sala> GetSalaId(int idSala);
         //Task<List<Sala>> GetSalasAvailable(Sala sala);
         //Task<List<Sala>> GetSalasLowerReserv(Sala sala);

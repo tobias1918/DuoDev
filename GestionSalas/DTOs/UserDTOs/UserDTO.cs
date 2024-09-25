@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestionSalas.Entity.DTOs
+namespace GestionSalas.Entity.DTOs.UserDTOs
 {
     public class UserDTO
     {
@@ -13,5 +13,6 @@ namespace GestionSalas.Entity.DTOs
         public string surname { get; set; }
         public string password { get; set; }
         public string email { get; set; }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using GestionSalas.Entity.DTOs;
+﻿using GestionSalas.Entity.DTOs.SalaDTOs;
 using GestionSalas.Entity.Entidades;
 using GestionSalas.UseCase.UseCases.Implementations;
 using GestionSalas.UseCase.UseCases.Interfaces;
@@ -72,15 +72,15 @@ namespace GestionSalas.API.Controllers
         }
 
         [HttpPut("ActualizarSala")]
-        public async Task<ActionResult> UpdateSala([FromBody] SalaDTO salaDTO)
+        public async Task<ActionResult> UpdateSala([FromBody] UpdateSalaDTO UpdateSalaDTO)
         {
-            if (salaDTO.idSala == 0 || salaDTO == null)
+            if (UpdateSalaDTO.idSala == 0 || UpdateSalaDTO == null)
             {
                 return BadRequest("Sala no válida.");
             }
             try
             {
-                await _salaService.UpdateSala(salaDTO);
+                await _salaService.UpdateSala(UpdateSalaDTO);
                 return NoContent();
             }
             catch (Exception ex)
@@ -106,3 +106,4 @@ namespace GestionSalas.API.Controllers
     }
 }
 
+    

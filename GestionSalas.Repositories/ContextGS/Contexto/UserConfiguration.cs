@@ -13,7 +13,7 @@ namespace GestionSalas.Repositories.ContextGS.Contexto
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("usuarios");
+            builder.ToTable("users");
             //declaro la id
             builder.HasKey(u => u.idUser);
             //la asigno
@@ -51,7 +51,7 @@ namespace GestionSalas.Repositories.ContextGS.Contexto
 
             builder.Property(u => u.rol)
            .HasColumnName("rol")
-           .HasColumnType("bit") //bit para el bool en sql server
+           .HasColumnType("tinyint") //0 userComun 1 Admin
            .IsRequired();
 
             builder.Property(u => u.isDeleted)

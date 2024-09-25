@@ -13,7 +13,7 @@ namespace GestionSalas.Entity.Entidades
         public string surname { get; set; }
         public string password { get; set; }
         public string email { get; set; }
-        public bool rol { get; set; }
+        public byte rol { get; set; } = 0;
         public bool isDeleted { get; set; } = false; //para borrar el usuario sin eliminar el registro
         //List<string> reservas { get; set; }
         

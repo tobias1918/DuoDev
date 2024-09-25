@@ -1,4 +1,4 @@
-﻿using GestionSalas.Entity.DTOs;
+﻿using GestionSalas.Entity.DTOs.UserDTOs;
 using GestionSalas.Entity.Entidades;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace GestionSalas.UseCase.UseCases.Interfaces
     public interface IUserService
     {
         Task CreateUser(UserDTO userDTO);
-        Task UpdateUser(UserDTO userDTO);
+        Task UpdateUser(UpdateUserDTO userDTO);
         Task DeleteUser(int idUser);
         Task<User> GetUserId(int idUser);
         Task<List<User>> GetAllUsers();

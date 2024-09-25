@@ -135,8 +135,8 @@ namespace GestionSalas.Repositories.Migrations
                         .HasColumnType("varchar(255)")
                         .HasColumnName("password");
 
-                    b.Property<bool>("rol")
-                        .HasColumnType("bit")
+                    b.Property<byte>("rol")
+                        .HasColumnType("tinyint")
                         .HasColumnName("rol");
 
                     b.Property<string>("surname")
@@ -147,7 +147,7 @@ namespace GestionSalas.Repositories.Migrations
 
                     b.HasKey("idUser");
 
-                    b.ToTable("usuarios", (string)null);
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("GestionSalas.Entity.Entidades.Reserva", b =>

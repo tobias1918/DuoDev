@@ -48,8 +48,16 @@ namespace GestionSalas.Repositories.Reposories.implementations
         {
             try
             {
-                var sala = await _context.Sala.Where(s => !s.isDeleted).FirstOrDefaultAsync(s => s.idSala == idSala);
-                return sala;
+                try
+                {
+                    return await _context.Sala
+                        .Where(c => !c.isDeleted)
+                        .FirstOrDefaultAsync(c => c.idSala == idSala);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener el usuario. Error: ", ex);
+                }
 
             }
             catch(Exception ex)
@@ -83,12 +91,25 @@ namespace GestionSalas.Repositories.Reposories.implementations
 
             try
             {
-                _context.Sala.Update(sala);
-                _context.SaveChangesAsync();
 
-            }catch(Exception ex)
+                //Verifico si ya existe una endidad con el mismo id en el contexto local
+                //si existe la desvinculamos del contexto para evitar el error de duplicado
+
+                var existingSale = _context.Sala.Local.FirstOrDefault(u => u.idSala == sala.idSala);
+                if (existingSale != null)
+                {
+                    //Desvinculo la entidad rastreada en en paso anterior
+                    _context.Entry(existingSale).State = EntityState.Detached;
+                }
+
+                _context.Sala.Update(sala);
+                await _context.SaveChangesAsync();
+
+
+            }
+            catch (Exception ex)
             {
-                throw new Exception("Error al actualizar la sala. Error: " ,ex);
+                throw new Exception("Error al actualizar el usuario. Error: ", ex);
             }
 
         }
