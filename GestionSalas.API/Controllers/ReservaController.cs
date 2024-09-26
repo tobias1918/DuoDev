@@ -170,5 +170,29 @@ namespace GestionSalas.API.Controllers
                 return StatusCode(500, $"Error al eliminar la reserva: {ex.Message}");
             }
         }
+
+        [HttpGet("getUserReservs")]
+        public async Task<ActionResult> GetUserReservs(int idUser)
+        {
+            try
+            {
+                if (idUser == null || idUser == 0)
+                {
+                    return BadRequest("Usuario no valido.");
+                }
+
+                var listReservs = await _reservaService.GetUserReservs(idUser);
+
+
+                return Ok(listReservs);
+
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al buscar las reservas del usuario: {ex.Message}");
+            }
+           
+        }
     }
 }

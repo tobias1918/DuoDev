@@ -72,6 +72,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                 surname = user.surname,
                 email = user.email,
                 password = user.password,
+                rol = user.rol
             };
         }
         public async Task<List<User>> GetAllUsers()
@@ -89,7 +90,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                     surname = user.surname,
                     email = user.email,
                     password = user.password,
-
+                    rol = user.rol,
                 };
                 listaUserSalida.Add(userSalida);
             }

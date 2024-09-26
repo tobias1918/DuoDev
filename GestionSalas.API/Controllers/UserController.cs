@@ -165,5 +165,38 @@ namespace GestionSalas.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpGet("ObtenerIdUser")]
+        public IActionResult GetUserId()
+        {
+            try
+            {
+                // Obtener el token JWT del encabezado de autorización
+                var authorizationHeader = Request.Headers["Authorization"].ToString();
+
+                if (string.IsNullOrEmpty(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
+                {
+                    return Unauthorized("Token no proporcionado o inválido.");
+                }
+
+                var token = authorizationHeader.Substring("Bearer ".Length).Trim();
+
+                // Usar el método para obtener el userId
+                var userId = _utilidades.GetUserIdFromToken(token);
+
+                if (userId.HasValue)
+                {
+                    return Ok(new { UserId = userId.Value });
+                }
+
+                return Unauthorized("No se encontró el UserId en el token.");
+            }
+            catch (Exception ex)
+            {
+                // Puedes registrar el error o manejarlo de alguna otra forma
+                return StatusCode(500, "Ocurrió un error al procesar el token.");
+            }
+
+        }
     }
 }

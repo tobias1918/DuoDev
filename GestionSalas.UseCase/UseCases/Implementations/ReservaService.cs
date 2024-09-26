@@ -146,7 +146,29 @@ namespace GestionSalas.UseCase.UseCases.Implementations
             }
         }
 
-        public async Task SaveChangesAsync()
+
+        public async Task<List<object>> GetUserReservs(int idUser) //dynamic devolver lista de cualquier tipo
+        {
+            try
+            {
+                var listReservas = await _reservaRepository.GetUserReservs(idUser);
+                if (listReservas == null)
+                {
+                    throw new Exception("NO TIENES RESERVAS");
+                }
+                return listReservas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la reserva. Error: ", ex);
+
+            }
+        }
+    
+
+
+
+    public async Task SaveChangesAsync()
         {
             try
             {
@@ -157,5 +179,6 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                 throw new Exception("Error al guardar los cambios. Error: ", ex);
             }
         }
+
     }
 }

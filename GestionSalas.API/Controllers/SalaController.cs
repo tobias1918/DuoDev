@@ -93,7 +93,7 @@ namespace GestionSalas.API.Controllers
         public async Task<ActionResult> DeleteSala(int id)
         {
             try
-            {
+            { 
                 await _salaService.DeleteSala(id);
                 return NoContent();
             }
