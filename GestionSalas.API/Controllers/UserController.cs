@@ -6,7 +6,7 @@ using NuGet.Protocol.Plugins;
 
 namespace GestionSalas.API.Controllers
 {
-    [ApiController]
+    [ApiController] 
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
