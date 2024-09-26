@@ -16,5 +16,6 @@ namespace GestionSalas.UseCase.UseCases.Interfaces
         Task<Reserva> GetReservaId(int idReserva);
         Task<List<Reserva>> GetAllReservas();
         Task SaveChangesAsync();
+        Task<List<ResponseSalasDisponiblesDTO>> GetSalasDisponibles (DateTime horaInicio, DateTime horaFin, int capacidad, int piso, int prioridad);
     }
 }

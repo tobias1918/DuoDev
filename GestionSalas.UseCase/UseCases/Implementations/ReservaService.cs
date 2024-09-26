@@ -84,6 +84,18 @@ namespace GestionSalas.UseCase.UseCases.Implementations
             }
         }
 
+        public async Task<List<ResponseSalasDisponiblesDTO>> GetSalasDisponibles(DateTime horaInicio, DateTime horaFin, int capacidad, int piso, int prioridad)
+        {
+            try
+            {
+                return await _reservaRepository.GetDisponiblesSalas(horaInicio, horaFin, capacidad, piso, prioridad);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener las salas disponibles. Error: ", ex);
+            }
+        }
+
         public async Task<Reserva> GetReservaId(int idReserva)
         {
             try

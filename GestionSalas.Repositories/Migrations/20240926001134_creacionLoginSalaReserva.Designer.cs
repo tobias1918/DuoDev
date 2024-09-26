@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionSalas.Repositories.Migrations
 {
     [DbContext(typeof(GestionSalasContext))]
-    [Migration("20240925182235_cargaTablasUserReservasSalas")]
-    partial class cargaTablasUserReservasSalas
+    [Migration("20240926001134_creacionLoginSalaReserva")]
+    partial class creacionLoginSalaReserva
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

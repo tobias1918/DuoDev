@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GestionSalas.Repositories.Migrations
 {
-    public partial class cargaTablasUserReservasSalas : Migration
+    public partial class creacionLoginSalaReserva : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

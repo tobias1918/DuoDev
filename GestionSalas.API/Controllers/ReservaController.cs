@@ -122,6 +122,32 @@ namespace GestionSalas.API.Controllers
             }
         }
 
+        // GET: api/Reserva/reservasDisponible}
+        [HttpPost("reservasDisponible")]
+        public async Task<ActionResult> ReservasDisponibles([FromBody] ReservaDisponibleDTO reservaDisponibleDTO)
+        {
+            try
+            {
+                if (reservaDisponibleDTO == null )
+                {
+                    return BadRequest("peticion no válida.");
+                }
+
+                DateTime horaInicio = DateTime.Now.Date.AddHours(reservaDisponibleDTO.hora).AddMinutes(reservaDisponibleDTO.minutos);
+                DateTime horaFin = horaInicio.AddMinutes(reservaDisponibleDTO.duracion);
+                List<ResponseSalasDisponiblesDTO> listaSalasDisponibles = await _reservaService.GetSalasDisponibles(horaInicio, horaFin, reservaDisponibleDTO.capacidad, reservaDisponibleDTO.piso, reservaDisponibleDTO.prioridad);
+                return Ok(listaSalasDisponibles);
+
+                
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al actualizar la reserva: {ex.Message}");
+            }
+        }
+
+
+
         // DELETE: api/Reserva/{id}
         [HttpDelete("deleteReserva/{id}")]
         public async Task<ActionResult> DeleteReserva(int id)
