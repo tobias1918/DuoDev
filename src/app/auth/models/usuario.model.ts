@@ -1,6 +1,8 @@
 export interface IUsuario {
-    id:       number;
-    nombre:   string;
-    apellido: string;
-    email:    string;
+    idUser:  number;
+    name:   string;
+    surname: string;
+    password:string;
+    email:string;
+    
 }

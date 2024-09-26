@@ -8,7 +8,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './modal.component.css'
 })
 export class ModalComponent {
-  @Input() prioridad!: string;
+  @Input() idSala!: number;
+  @Input() idReserva!: number;
+  @Input() codigoSala!: string;
+  @Input() prioridad!: number;
   @Input() piso!: number;
   @Input() nombreSala!: string;
   @Input() capacidad!: number;

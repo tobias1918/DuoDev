@@ -11,7 +11,10 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrl: './card-sala.component.css'
 })
 export class CardSalaComponent {
-    @Input() prioridad!: string;
+    @Input() idSala!: number;
+    @Input() idReserva!: number;
+    @Input() codigoSala!: string;
+    @Input() prioridad!: number;
     @Input() piso!: number;
     @Input() nombreSala!: string;
     @Input() capacidad!: number;

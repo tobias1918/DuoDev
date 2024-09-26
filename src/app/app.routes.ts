@@ -12,6 +12,7 @@ import { authGuard } from './custom/auth.guard';
 import { EditProfileComponent } from './features/edit-profile/edit-profile.component';
 import { PanelUsuariosComponent } from './admin/panel-usuarios/panel-usuarios.component';
 import { PanelSalasComponent } from './admin/panel-salas/panel-salas.component';
+import { authInterceptor } from './custom/auth.interceptor';
 
 
 
@@ -22,7 +23,7 @@ export const routes: Routes = [
         path: '', 
         component: PageComponent, // El PageComponent es el contenedor principal
         children: [
-          { path: 'home', component: HomeComponent},
+          { path: 'home', component: HomeComponent,},
           { path: 'reserva', component: ReservasComponent },
           { path: 'reserva/salas-individuales', component: SalasIndividualesComponent },
           { path: 'reserva/salas-multiples', component: SalasMultiplesComponent },
@@ -35,6 +36,7 @@ export const routes: Routes = [
           
         ]
       },
+      { path: '**', redirectTo: 'home', pathMatch: 'full'},
 
    
 ];

@@ -17,11 +17,15 @@ export class AccesoService {
   constructor() { }
 
   registrarse(objeto:Usuario):Observable<ResponseAcceso>{
-    return this.http.post<ResponseAcceso>(`${this.baseUrl}/registrarse`,objeto)
+    return this.http.post<ResponseAcceso>(`${this.baseUrl}User/CrearUser`,objeto)
   }
 
   login(objeto:Login):Observable<ResponseAcceso>{
-    return this.http.post<ResponseAcceso>(`${this.baseUrl}/login`,objeto)
+    return this.http.post<ResponseAcceso>(`${this.baseUrl}User/Login`,objeto)
+  }
+
+  validarToken(token:string):Observable<ResponseAcceso>{
+    return this.http.get<ResponseAcceso>(`${this.baseUrl}User/ValidarToken?token${token}`)
   }
 
 

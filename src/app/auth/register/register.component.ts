@@ -14,7 +14,7 @@ import { Usuario } from '../models/Usuario';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   private accesoService=inject(AccesoService);
   private router = inject(Router);
@@ -74,34 +74,25 @@ export class RegisterComponent implements OnInit {
 
 //LOGICA API 
 
-  private _registerService = inject(RegisterService);
-
-  usuarioList:IUsuario[]=[];
-
-  ngOnInit(): void {
-    this._registerService.getUsuarios().subscribe((data:IUsuario[])=>{
-      console.log(data);
-      this.usuarioList = data;
-    });
-  }
-
-
 
 
 
 registrarse() {
   if(this.formRegister.invalid)return;
   const objeto:Usuario = {
-    nombre: this.formRegister.get('nombre')?.value,
-    apellido: this.formRegister.get('apellido')?.value,
-    email: this.formRegister.get('email')?.value,
+    idUser:0,
+    name: this.formRegister.get('nombre')?.value,
+    surname: this.formRegister.get('apellido')?.value,
     password: this.formRegister.get('password')?.value,
+    email: this.formRegister.get('email')?.value,
+    
   };
+  console.log(objeto);
 
   this.accesoService.registrarse(objeto).subscribe({
     next:(data)=>{
       if(data.isSuccess){
-        this.router.navigate(["/signup"])
+        this.onLoginClick()
       }else{
         alert("No se pudo registrar");
       }

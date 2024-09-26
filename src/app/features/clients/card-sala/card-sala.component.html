@@ -5,13 +5,29 @@
         <h5 class="card-title"></h5>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <h3><strong>Piso {{piso}} : Sala {{nombreSala}}</strong> </h3>
+                @if(piso==0){
+                    <h3><strong>Piso PB : Sala {{codigoSala}}</strong> </h3>
+                }@else{
+                <h3><strong>Piso {{piso}} : Sala {{codigoSala}}</strong> </h3>
+                }
             </li>
-            @if(prioridad==null){
+            @if(prioridad==-1){
             <li class="list-group-item" style="width: 100%; text-align: center;"> Sala disponible</li>
             }@else{
-            <li class="list-group-item" style="width: 100%; text-align: center;"> Sala reservada</li>
-            <li class="list-group-item" style="width: 100%; text-align: center;"> prioridad: {{prioridad}}</li>
+                <div class="d-flex list-group-item justify-content-center align-items-center">
+                    <i class="bi bi-exclamation-diamond-fill" style="font-size: 30px;color: #ffc107;position: relative;"></i>
+                    <li style="width: 100%; text-align: center;list-style: none;"> Sala reservada</li>
+                </div>
+         
+            @if(prioridad==0){
+            <li class="list-group-item" style="width: 100%; text-align: center;"> prioridad: Baja</li>
+            }
+            @if(prioridad==1){
+            <li class="list-group-item" style="width: 100%; text-align: center;"> prioridad: Media</li>
+            }
+            @if(prioridad==2){
+            <li class="list-group-item" style="width: 100%; text-align: center;"> prioridad: Alta</li>
+            }
             }
         </ul>
         <div>
@@ -33,7 +49,8 @@
 
                     <div class="d-flex justify-content-center align-items-center my-2">
                         <app-modal [modalId]="modalId" [prioridad]="prioridad" [piso]="piso" [nombreSala]="nombreSala"
-                            [capacidad]="capacidad" [horaInicio]="horaInicio" [horaFin]="horaFin">
+                            [capacidad]="capacidad" [horaInicio]="horaInicio" [horaFin]="horaFin" [idSala]="idSala"
+                            [idReserva]="idReserva" [codigoSala]="codigoSala">
                         </app-modal>
                     </div>
                 </ul>

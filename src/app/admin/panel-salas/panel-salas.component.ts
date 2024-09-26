@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalEditSalaComponent } from '../modal-edit-sala/modal-edit-sala.component';
-import { ModalEditSalaService } from '../modal-edit-sala.service';
+
 import { CommonModule } from '@angular/common';
+import { ModalEditSalaService } from '../modal-edit-sala.service';
 
 @Component({
   selector: 'app-panel-salas',

@@ -1,3 +1,3 @@
 export const appsettings={
-    apiUrl:"http://localhost:5159/api/"
+    apiUrl:"https://localhost:7243/api/"
 }

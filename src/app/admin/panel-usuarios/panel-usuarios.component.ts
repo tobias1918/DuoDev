@@ -3,6 +3,7 @@ import { ModalEditUsuarioComponent } from '../modal-edit-usuario/modal-edit-usua
 import { CommonModule } from '@angular/common';
 import { ModalEditUsuarioService } from '../modal-edit-usuario.service';
 
+
 @Component({
   selector: 'app-panel-usuarios',
   standalone: true,
