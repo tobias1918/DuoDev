@@ -70,7 +70,8 @@ namespace GestionSalas.API.Controllers
                 userDTO.password = hasPassword;
 
                 await _userService.CreateUser(userDTO);
-                return CreatedAtAction(nameof(GetById), new { id = userDTO.idUser }, userDTO);
+                return StatusCode(StatusCodes.Status200OK, new{isSuccess = true});
+                
             }
             catch (Exception ex)
             {

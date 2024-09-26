@@ -1,4 +1,5 @@
-﻿using GestionSalas.Entity.Entidades;
+﻿using GestionSalas.Entity.DTOs.ReservaDTOs;
+using GestionSalas.Entity.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace GestionSalas.Repositories.Reposories.interfaces
         Task<Reserva> GetReservaId(int idReserva);
         Task<List<Reserva>> GetAllReservas();
         Task SaveChangesAsync();
+        Task<List<ResponseSalasDisponiblesDTO>> GetDisponiblesSalas(DateTime horaInicio, DateTime horaFin, int capacidad, int piso, int prioridad);
     }
 }
