@@ -1,6 +1,7 @@
 ﻿using GestionSalas.Entity.DTOs.ReservaDTOs;
 using GestionSalas.Entity.DTOs.UserDTOs;
 using GestionSalas.Entity.Entidades;
+using GestionSalas.UseCase.UseCases.Implementations;
 using GestionSalas.UseCase.UseCases.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -193,6 +194,20 @@ namespace GestionSalas.API.Controllers
                 return StatusCode(500, $"Error al buscar las reservas del usuario: {ex.Message}");
             }
            
+        }
+
+        [HttpPost("CrearMultiReserva")]
+        public async Task<IActionResult> CreateMultiReserv([FromBody] List<Reserva> reservas)
+        {
+            try
+            {0
+                await _reservaService.CreateMultiReserv(reservas);
+                return Ok("Reservas creadas exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error al crear reservas: {ex.Message}");
+            }
         }
     }
 }

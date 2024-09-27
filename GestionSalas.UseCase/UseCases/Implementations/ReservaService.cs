@@ -13,6 +13,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
     public class ReservaService : IReservaService
     {
         private readonly IReservaRepository _reservaRepository;
+    
 
         public ReservaService(IReservaRepository reservaRepository)
         {
@@ -58,8 +59,10 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                         if (reservaDTO.horaFin != null)
                             reserva.horaFin = (DateTime)reservaDTO.horaInicio;
 
-                        if (reservaDTO.state != null)
+                        if (reservaDTO.state != null) {
                             reserva.state = reservaDTO.state.ToLower();
+                        }
+
 
                     }
 
@@ -164,11 +167,21 @@ namespace GestionSalas.UseCase.UseCases.Implementations
 
             }
         }
-    
 
 
+        public async Task CreateMultiReserv(List<Reserva> listReservas)
+        {
+            try
+            {
+                await _reservaRepository.CreateMultiReserv(listReservas);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al crear una multi Reserva Error: ", ex);
+            }
+        }
 
-    public async Task SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
             try
             {
@@ -181,4 +194,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
         }
 
     }
+
+
+  
 }

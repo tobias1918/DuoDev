@@ -120,9 +120,13 @@ namespace GestionSalas.Repositories.Reposories.implementations
 
         public async Task DeleteUser(int idUser)
         {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            //si borramos usuarios tambien borramos sus reservas
+            var reservas = await _context.Reserva.Where(r => r.idUsuario == idUser).ToListAsync();
             try
             {
                 var user = await GetUserId(idUser);
+
                 if (user != null)
                 {
                     user.isDeleted = true; // Marca el usuario como eliminado
@@ -133,10 +137,23 @@ namespace GestionSalas.Repositories.Reposories.implementations
                 {
                     throw new Exception("usuario no encontrado.");
                 }
+
+                //eliminamos reserva
+                if(reservas != null)
+                {
+                    foreach (var reserva in reservas)
+                    {
+                        _context.Reserva.Remove(reserva);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+                await transaction.CommitAsync();
+
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al eliminar el usuario. Error: ", ex);
+                await transaction.RollbackAsync();
+                throw;
             }
         }
 

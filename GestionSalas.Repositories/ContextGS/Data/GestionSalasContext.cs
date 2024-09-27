@@ -28,6 +28,7 @@ namespace GestionSalas.Repositories.ContextGS.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Sala> Sala { get; set; }
         public DbSet<Reserva> Reserva { get; set; }
+        public DbSet<Notificacion> Notificacion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

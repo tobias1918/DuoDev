@@ -62,7 +62,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
             await _userRepository.DeleteUser(idUser);
         }
 
-        public async Task<User> GetUserId(int id)
+        public async Task<User> GetUserId(int id)   
         {
            var user =  await _userRepository.GetUserId(id);
             return new User
@@ -73,7 +73,7 @@ namespace GestionSalas.UseCase.UseCases.Implementations
                 email = user.email,
                 password = user.password,
                 rol = user.rol
-            };
+                };
         }
         public async Task<List<User>> GetAllUsers()
         {

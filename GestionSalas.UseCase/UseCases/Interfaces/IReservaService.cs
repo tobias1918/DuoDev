@@ -18,6 +18,7 @@ namespace GestionSalas.UseCase.UseCases.Interfaces
         Task SaveChangesAsync();
         Task<List<ResponseSalasDisponiblesDTO>> GetSalasDisponibles (DateTime horaInicio, DateTime horaFin, int capacidad, int piso, int prioridad);
         Task<List<object>> GetUserReservs(int idUser);
+        Task CreateMultiReserv(List<Reserva> reservaList);
 
         //dynamic para indicar que puedo devolver una lista de cualquier tipo
     }

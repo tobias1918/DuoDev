@@ -183,7 +183,7 @@ namespace GestionSalas.API.Controllers
 
                 // Usar el método para obtener el userId
                 var userId = _utilidades.GetUserIdFromToken(token);
-
+                
                 if (userId.HasValue)
                 {
                     return Ok(new { UserId = userId.Value });
@@ -198,5 +198,6 @@ namespace GestionSalas.API.Controllers
             }
 
         }
+
     }
 }

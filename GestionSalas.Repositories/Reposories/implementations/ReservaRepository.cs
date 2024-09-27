@@ -4,6 +4,7 @@ using GestionSalas.Repositories.ContextGS.Data;
 using GestionSalas.Repositories.Reposories.interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,9 @@ namespace GestionSalas.Repositories.Reposories.implementations
                 bool usuarioExist = await _context.Users.AnyAsync(r => r.idUser == reserva.idUsuario);
                 bool salaExist = await _context.Sala.AnyAsync(r => r.idSala == reserva.idSala);
 
+                var salaOcupada = await _context.Reserva.FirstOrDefaultAsync(r => r.horaInicio <= reserva.horaFin
+                && r.horaFin >= reserva.horaInicio && r.idSala == reserva.idSala);
+                  
                 if (reservaExist)
                 {
                     throw new Exception("Este idReserva ya existe");
@@ -39,6 +43,24 @@ namespace GestionSalas.Repositories.Reposories.implementations
                 if (!salaExist)
                 {
                     throw new Exception("Este id sala no existe");
+                }
+                if (salaOcupada != null)
+                {
+                    Sala sala = await _context.Sala.FirstOrDefaultAsync(s => s.idSala == reserva.idSala);
+                    
+                    Notificacion notificacion = new Notificacion
+                    {
+                        idNotificacion = 0,
+                        idUser = reserva.idUsuario,
+                        titulo = "Tu reserva Fue eliminada por una de mayor prioridad",
+                        mensaje = $"Tu reserva a la sala {sala.nameSala} " +
+                        $" Codigo {sala.codSala} fue eliminada por una de mayor prioridad, Por favor vuelva a " +
+                        $"crear una reserva en un horario distinto o a otra sala",
+                       
+                    };
+                    _context.Notificacion.Add(notificacion);
+                    _context.Reserva.Remove(salaOcupada);
+                    _context.SaveChanges();
                 }
 
                 await _context.Reserva.AddAsync(reserva);
@@ -62,7 +84,7 @@ namespace GestionSalas.Repositories.Reposories.implementations
                 .Where(s => !s.isDeleted && s.capacitySala >= capacidad && s.floorSala == piso)
                 .GroupJoin(
                     _context.Reserva
-                        .Where(r => r.horaInicio < end && r.horaFin > start),
+                        .Where(r => r.horaInicio <= end && r.horaFin >= start),
                     sala => sala.idSala,
                     reserva => reserva.idSala,
                     (sala, reservas) => new { Sala = sala, Reservas = reservas })
@@ -172,6 +194,17 @@ namespace GestionSalas.Repositories.Reposories.implementations
 
                 _context.Reserva.Update(reserva);
                 await _context.SaveChangesAsync();
+
+                Notificacion notificacion = new Notificacion
+                {
+                    idNotificacion = 0, 
+                    idUser = reserva.idUsuario,
+                    titulo = "Tu reserva cambió de estado",
+                    mensaje = $"Tu reserva tuvo un cambio de estado a {reserva.state}",
+                    idReserva = reserva.idReserva 
+                };
+                _context.Notificacion.Add(notificacion);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -257,54 +290,54 @@ namespace GestionSalas.Repositories.Reposories.implementations
             }
             
 
-            
-           /* try
-            {
-
-                List<object> reservasSimples = new List<dynamic>();
-                List<object> multiReservas = new List<dynamic>();
-
-                var reservasComunes = await _context.Reserva.
-                    Where(r => r.idUsuario == idUser).ToListAsync();
-
-                foreach(var reserva in reservasComunes)
-                {
-                    foreach(var reserva2 in reservasComunes)
-                    {
-                        if (reserva.idSala != reserva2.idSala &&
-                            reserva.horaInicio == reserva2.horaInicio &&
-                            reserva.horaFin == reserva2.horaFin)
-                        {
-                            multiReservas.Add(reserva);
-                            multiReservas.Add(reserva2);  
-                        }
-                        else
-                        {
-                            reservasSimples.Add(reserva);
-                        }
-                    }
-                }
-
-
-                var combinacion = new List<object> { reservasComunes, multiReservas };
-                
-                if (combinacion == null)
-                {
-                    throw new Exception("NO TIENES RESERVAS");
-                }
-                return combinacion;
-
-
-            }
-            catch (Exception ex) 
-            {
-                throw new Exception("Error al actualizar la reserva. Error: ", ex);
-            }
-           */
-             
 
         }
 
+        public async Task CreateMultiReserv(List<Reserva> multiReservas)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            {
 
+                try
+                {
+                    foreach (var reserva in multiReservas)
+                    {
+
+                        var salaOcupada = await _context.Reserva.FirstOrDefaultAsync(r => r.horaInicio < reserva.horaFin
+                         && r.horaFin > reserva.horaInicio && r.idSala == reserva.idSala);
+
+                        if (salaOcupada != null)
+                        {
+                            Sala sala = await _context.Sala.FirstOrDefaultAsync(s => s.idSala == reserva.idSala);
+
+                            Notificacion notificacion = new Notificacion
+                            {
+                                idNotificacion = 0,
+                                idUser = reserva.idUsuario,
+                                titulo = "Tu reserva Fue eliminada por una de mayor prioridad",
+                                mensaje = $"Tu reserva a la sala {sala.nameSala} " +
+                                $" Codigo {sala.codSala} fue eliminada por una de mayor prioridad, Por favor vuelva a " +
+                                $"crear una reserva en un horario distinto o a otra sala",
+                             
+                            };
+                            _context.Notificacion.Add(notificacion);
+                            _context.Reserva.Remove(salaOcupada);
+                            _context.SaveChanges();
+                        }
+
+                        await _context.Reserva.AddAsync(reserva);
+                    }
+
+                    // Confirmar cambios
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+                }
+                catch
+                {
+                    await transaction.RollbackAsync();
+                    throw; // Devolver la excepción para que el controlador la maneje
+                }
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace GestionSalas.Repositories.Reposories.implementations
@@ -68,21 +69,35 @@ namespace GestionSalas.Repositories.Reposories.implementations
         }
         public async Task DeleteSala(int idSala)
         {
+            using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
 
                 Sala sala = await _context.Sala.FirstOrDefaultAsync(s => s.idSala == idSala);
+                var reservas = await _context.Reserva.Where(r=>r.idSala == idSala).ToListAsync();
                 if(sala != null)
                 {
                     sala.isDeleted = true;
+
                     _context.Sala.Update(sala);
                     await _context.SaveChangesAsync();
                 }
+                if(reservas != null)
+                {
+                    foreach (var reserva in reservas)
+                    {
+                        _context.Reserva.Remove(reserva);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+
+                await transaction.CommitAsync();
 
             }
             catch(Exception ex)
             {
-                throw new Exception("usuario no encontrado. Error: " ,ex);
+                await transaction.RollbackAsync();
+                throw;
             }
         }
 
