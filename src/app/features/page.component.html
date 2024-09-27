@@ -36,26 +36,28 @@
               Notificaciones
             </a>
           </li>
+         @if(userId==1){
           <li>
             <a routerLink="panel-usuario" class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='panelUsuarios'}"
               (click)="onOption('panelUsuarios')" aria-current="page">
               <i class="bi bi-person-vcard"></i>
-              Panel Usuarios (admin)
+              Panel Usuarios 
             </a>
           </li>
           <li>
             <a routerLink="panel-salas" class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='panelSalas'}"
               (click)="onOption('panelSalas')" aria-current="page">
               <i class="bi bi-gear"></i>
-              Panel Salas (admin)
+              Panel Salas 
             </a>
           </li>
+        }
         </ul>
         <hr>
         <div class="dropdown">
           <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <img src="https://img.freepik.com/foto-gratis/fondo-abstracto-azul-degradado-estudio-azul-oscuro-liso-vineta-negra_1258-53689.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong>User</strong>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
