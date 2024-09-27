@@ -1,23 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CardSalaComponent } from "../card-sala/card-sala.component";
 import { CardMisSalasComponent } from '../card-mis-salas/card-mis-salas.component';
+import { reservaModel } from '../models/reservaModel';
+import { MisReservasService } from '../services/mis-reservas.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-mis-reservas',
   standalone: true,
-  imports: [CardMisSalasComponent],
+  imports: [CardMisSalasComponent,CommonModule],
   templateUrl: './mis-reservas.component.html',
   styleUrl: './mis-reservas.component.css'
 })
-export class MisReservasComponent {
+export class MisReservasComponent implements OnInit {
+  reservas: reservaModel[] = []; // Lista donde guardaremos las reservas
+  reservasMultiples:reservaModel[][]=[];
+  constructor(private misReservasService: MisReservasService) {}
 
-  nombre='martin';
+  ngOnInit(): void {
+    this.getUserReservas();
+    this.getUsersMultiReservas();
+  }
 
-  salas = [
-    { prioridad: 'Alta', piso: 1, habitacion: 2, capacidad: 21 },
-    { prioridad: 'Media', piso: 2, habitacion: 3, capacidad: 20 },
-    { prioridad: 'Baja', piso: 3, habitacion: 1, capacidad: 22 }
-  ];
+  getUserReservas(): void {
+    const userId = Number(localStorage.getItem('userId')); // Recuperar el ID del usuario del localStorage
+    this.misReservasService.getUserSalasSimples(userId).subscribe(
+      (data: reservaModel[]) => {
+        this.reservas = data;
+      },
+      (error) => {
+        console.error('Error al obtener reservas', error);
+      }
+    );
+}
+
+getUsersMultiReservas(): void {
+  const userId = Number(localStorage.getItem('userId')); // Recuperar el ID del usuario del localStorage
+  this.misReservasService.getUserSalasMultiples(userId).subscribe(
+    (data: reservaModel[][]) => {
+      console.log(data);
+      console.log("e");
+      this.reservasMultiples = data; // Guardamos las reservas múltiples
+    },
+    (error) => {
+      console.error('Error al obtener reservas', error);
+    }
+  );
+}
+
 
 }

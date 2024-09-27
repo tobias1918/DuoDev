@@ -3,8 +3,8 @@
     <aside class="d-flex flex-nowrap sticky-sidebar" style="position: sticky; top: 0; height: 100vh;">
       <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-          <i class="bi bi-bootstrap me-2" style="font-size: 2rem;"></i>
-          <span class="fs-4">Gestion Reservas</span>
+          <i class="bi bi-people-fill" style="font-size: 2rem;"></i>
+          <span class="fs-4">&nbsp; DuoDev / ></span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
@@ -27,6 +27,13 @@
               (click)="onOption('buscarReserva')" aria-current="page">
               <i class="bi bi-calendar3"></i>
               Mis reservas
+            </a>
+          </li>
+          <li>
+            <a routerLink="notificaciones" class="nav-link text-white" style="cursor: pointer;" [ngClass]="{active:menuOption=='notificaciones'}"
+              (click)="onOption('notificaciones')" aria-current="page">
+              <i class="bi bi-bell"></i>
+              Notificaciones
             </a>
           </li>
           <li>
@@ -57,7 +64,8 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+            <li><a class="dropdown-item" href="#" (click)="cerrarSesion()">Cerrar Sesión</a></li>
+
           </ul>
         </div>
       </div>

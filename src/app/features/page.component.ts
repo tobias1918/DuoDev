@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-page',
@@ -14,5 +14,16 @@ export class PageComponent  {
 
   onOption(menuOption: string) {
     this.menuOption = menuOption;
+  }
+
+  constructor(private router: Router) {} // Inyecta el Router
+
+  cerrarSesion(): void {
+    // Eliminar el token y el userId del localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+
+    // Redirigir al usuario a la página de signup
+    this.router.navigate(['/signup']);
   }
 }

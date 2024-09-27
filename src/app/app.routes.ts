@@ -13,6 +13,7 @@ import { EditProfileComponent } from './features/edit-profile/edit-profile.compo
 import { PanelUsuariosComponent } from './admin/panel-usuarios/panel-usuarios.component';
 import { PanelSalasComponent } from './admin/panel-salas/panel-salas.component';
 import { authInterceptor } from './custom/auth.interceptor';
+import { NotificacionesComponent } from './features/clients/notificaciones/notificaciones.component';
 
 
 
@@ -28,6 +29,7 @@ export const routes: Routes = [
           { path: 'reserva/salas-individuales', component: SalasIndividualesComponent ,canActivate:[authGuard]},
           { path: 'reserva/salas-multiples', component: SalasMultiplesComponent ,canActivate:[authGuard]},
           { path: 'mis-reservas', component: MisReservasComponent ,canActivate:[authGuard]},
+          { path: 'notificaciones', component: NotificacionesComponent ,canActivate:[authGuard]},
           { path: 'perfil', component: ProfileComponent ,canActivate:[authGuard]},
           { path: 'editar-perfil', component: EditProfileComponent,canActivate:[authGuard]},
           { path: 'panel-usuario', component: PanelUsuariosComponent ,canActivate:[authGuard]},
