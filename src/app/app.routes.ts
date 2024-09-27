@@ -23,7 +23,7 @@ export const routes: Routes = [
         path: '', 
         component: PageComponent, // El PageComponent es el contenedor principal
         children: [
-          { path: 'home', component: HomeComponent,},
+          { path: 'home', component: HomeComponent,canActivate:[authGuard]},
           { path: 'reserva', component: ReservasComponent },
           { path: 'reserva/salas-individuales', component: SalasIndividualesComponent },
           { path: 'reserva/salas-multiples', component: SalasMultiplesComponent },

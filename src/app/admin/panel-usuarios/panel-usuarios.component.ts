@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ModalEditUsuarioComponent } from '../modal-edit-usuario/modal-edit-usuario.component';
 import { CommonModule } from '@angular/common';
 import { ModalEditUsuarioService } from '../modal-edit-usuario.service';
+import { UsuarioEdit } from '../models/UsuarioEdit';
+import { PanelUsuariosService } from '../services/panel-usuarios.service';
 
 
 @Component({
@@ -13,22 +15,39 @@ import { ModalEditUsuarioService } from '../modal-edit-usuario.service';
 })
 export class PanelUsuariosComponent {
 
-  usuarios = [
-    { id: 1, nombre: 'Tobias' ,apellido:' Molina', email: 'tobias@gmail.com', rol: 'usuario' },
-    { id: 2, nombre: 'Juan' ,apellido:' Perez', email: 'juan@gmail.com',  rol: 'usuario' },
-    { id: 3, nombre: 'Ana' ,apellido:' Rodriguez', email: 'ana@gmail.com', rol: 'admin' },
-    { id: 4, nombre: 'Lucas' ,apellido:' Sanchez', email: 'lucas@gmail.com',  rol: 'usuario' },
-    { id: 5, nombre: 'Maria' ,apellido:' Lopez', email: 'maria@gmail.com', rol: 'usuario' }
-  ];
+  usuarios: UsuarioEdit[] = [];
 
-  constructor(private modalEditUsuarioService: ModalEditUsuarioService) {}
+  constructor(
+    private modalEditUsuarioService: ModalEditUsuarioService,
+    private panelUsuarioService: PanelUsuariosService
+  ) {}
+
+  ngOnInit() {
+    console.log("entre");
+    this.cargarUsuarios();
+  }
+
+  // Método para cargar todas las salas
+  cargarUsuarios() {
+    this.panelUsuarioService.traerUsuarios().subscribe({
+      next: (data) => {  // Ahora 'data' es un array de Sala
+        console.log(data);
+        this.usuarios = data; // Asigna las salas obtenidas al array
+        console.log('Salas cargadas:', this.usuarios);
+      },
+      error: (error: any) => {
+        console.error('Error al cargar las salas:', error);
+      },
+    });
+  }
+  
 
   eliminarUsuario(id: number) {
     if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
       this.modalEditUsuarioService.deleteUser(id).subscribe({
         next: (response) => {
           console.log('Usuario eliminado:', response);
-          location.reload();
+          this.cargarUsuarios();
         },
         error: (error) => {
           console.error('Error al eliminar el usuario:', error);

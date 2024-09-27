@@ -4,13 +4,13 @@ import { ModalComponent } from '../modal/modal.component';
 
 
 @Component({
-  selector: 'app-card-sala',
+  selector: 'app-card-sala-2',
   standalone: true,
   imports: [CommonModule,ModalComponent],
   templateUrl: './card-sala.component.html',
   styleUrl: './card-sala.component.css'
 })
-export class CardSalaComponent {
+export class CardSalaComponent2 {
     @Input() idSala!: number;
     @Input() idReserva!: number;
     @Input() codigoSala!: string;

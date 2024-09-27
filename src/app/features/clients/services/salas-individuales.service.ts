@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { appsettings } from '../../../settings/appsettings';
 import { salaResponseList } from '../models/salaResponseList';
 import { salaRequest } from './../models/salasRequest';
+import { crearReservaParam } from './../models/crearReservaParam';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,11 @@ export class SalaService {
   salasDisponibles(request:salaRequest):Observable<salaResponseList>{
     return this.http.post<salaResponseList>(`${this.baseUrl}Reserva/reservasDisponible`,request)
   }
+
+  crearReserva(crearReservaParam:crearReservaParam):Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}Reserva/createReserva`,crearReservaParam)
+  }
+
+
 
 }

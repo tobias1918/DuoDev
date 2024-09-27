@@ -17,28 +17,7 @@ export class LoginComponent {
   private accesoService=inject(AccesoService);
   private router = inject(Router);
 
-  iniciarSesion(){
-    if(this.loginForm.invalid) return;
-
-    const objeto:Login={
-      email:this.loginForm.value.email,
-      password:this.loginForm.value.password
-    }
-
-    this.accesoService.login(objeto).subscribe({
-      next:(data)=>{
-        if(data.isSuccess){
-          localStorage.setItem("token",data.token);
-          this.router.navigate(["home"]);
-        }else{
-          alert("las credenciales son incorrectas");
-        }
-      },
-      error:(error)=>{
-        console.log(error.message);
-      }
-    })
-  }
+ 
 
 
 
@@ -65,7 +44,45 @@ export class LoginComponent {
   //   console.log(form)
   // }
 
+  iniciarSesion() {
+    if (this.loginForm.invalid) return;
+  
+    const objeto: Login = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
+  
+    this.accesoService.login(objeto).subscribe({
+      next: (data) => {
+        if (data.isSuccess) {
+          localStorage.setItem("token", data.token);
+  
+          // Llamar al método para obtener el ID de usuario
+          this.obtenerIdUsuario();
+        } else {
+          alert("Las credenciales son incorrectas");
+        }
+      },
+      error: (error) => {
+        console.log(error.message);
+      }
+    });
+  }
 
+  obtenerIdUsuario() {
+    // Aquí puedes hacer la llamada a tu endpoint
+    this.accesoService.obtenerIdUsuario().subscribe({
+      next: (data) => {
+        // Supongamos que `data.id` es el ID que quieres almacenar
+        console.log(data)
+        localStorage.setItem("userId", data.userId);
+        this.router.navigate(["home"]);
+      },
+      error: (error) => {
+        console.log("Error al obtener el ID de usuario:", error.message);
+      }
+    });
+  }
 
 
 

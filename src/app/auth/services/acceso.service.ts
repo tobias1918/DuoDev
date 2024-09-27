@@ -25,8 +25,12 @@ export class AccesoService {
   }
 
   validarToken(token:string):Observable<ResponseAcceso>{
-    return this.http.get<ResponseAcceso>(`${this.baseUrl}User/ValidarToken?token${token}`)
+    return this.http.get<ResponseAcceso>(`${this.baseUrl}User/ValidarToken?token=${token}`)
   }
+
+   obtenerIdUsuario():Observable<any>{
+     return this.http.get<any>(`${this.baseUrl}User/ObtenerIdUser`)
+   }
 
 
 }

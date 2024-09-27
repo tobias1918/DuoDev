@@ -13,3 +13,22 @@
     height: 80vh;
 
 }
+
+.horario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 20px;
+
+
+}
+
+.hora{
+    border-radius: 0px;
+    width: 70px;
+    -webkit-appearance: none;  /* Chrome, Safari, Opera */
+    -moz-appearance: none;     /* Firefox */
+    appearance: none;          /* Estándar */
+    
+}

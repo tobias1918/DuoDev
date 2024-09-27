@@ -10,4 +10,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ProfileComponent {
 
+
+  id: string | null = localStorage.getItem("userId");
+
 }

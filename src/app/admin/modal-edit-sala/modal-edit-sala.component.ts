@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalEditSalaService } from '../modal-edit-sala.service';
@@ -8,36 +8,42 @@ import { ModalEditSalaService } from '../modal-edit-sala.service';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './modal-edit-sala.component.html',
-  styleUrl: './modal-edit-sala.component.css'
+  styleUrls: ['./modal-edit-sala.component.css'], // Cambié a `styleUrls` para el plural correcto
 })
-export class ModalEditSalaComponent {
+export class ModalEditSalaComponent implements OnInit {
   @Input() modalId!: string;
-  @Input() sala: any; // Recibe el usuario desde el componente padre
+  @Input() sala: any; // Recibe la sala desde el componente padre
 
-  private modalEditSalaService=inject(ModalEditSalaService);
+  private modalEditSalaService = inject(ModalEditSalaService);
   private router = inject(Router);
 
   editSalaForm!: FormGroup;
-  
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.editSalaForm = this.fb.group({
-      id:[this.sala?.id],
-      nombreSala: [this.sala?.nombreSala || '', [Validators.required, Validators.minLength(3)]],
-      capacidad: [this.sala?.capacidad || '', [Validators.required, Validators.email,Validators.pattern('^[0-9]*$')]],
+      idSala: [this.sala?.idSala || ''], // Asegúrate de recibir `idSala` del padre
+      nameSala: [this.sala?.nameSala || '', [ Validators.maxLength(20)]],
+      codSala: [this.sala?.codSala || '', [ Validators.maxLength(3)]],
+      capacitySala: [this.sala?.capacitySala || '', [ Validators.pattern('^[0-9]*$')]], // Cambié el validador
     });
   }
 
-  guardarCambios() {
+  guardarCambiosa() {
+    console.log("entre al guardar cambios")
     if (this.editSalaForm.valid) {
-      const updatedUser = this.editSalaForm.value;
-      this.modalEditSalaService.updateSala(updatedUser).subscribe({
-        next: (response) => console.log('Usuario actualizado:', response),
-        error: (error) => console.error('Error al actualizar el usuario:', error),
+      const updatedSala = this.editSalaForm.value; // Obtén los valores actualizados
+      console.log(this.editSalaForm.value)
+      this.modalEditSalaService.updateSala(updatedSala).subscribe({
+        next: (response) => {
+          console.log('Sala actualizada:', response);
+          window.location.reload();
+        },
+        error: (error) => {
+          console.error('Error al actualizar la sala:', error);
+        },
       });
     }
   }
-
 }

@@ -38,7 +38,19 @@ export class SalasIndividualesComponent implements OnInit {
   ngOnInit() {
   }
 
+  propertyForm!: number;
+
+  obtenerPrioridad() {
+    this.propertyForm = Number(this.formSalaIndividual.value.prioridad);
+  }
+
+  onSubmit() {
+    this.obtenerPrioridad(); // Llama a la función para asignar el valor
+    console.log(this.propertyForm); // Verifica el valor en la consola
+  }
+
   buscarSalasDisponibles() {
+    this.obtenerPrioridad(); // Llama a la función para asignar el valor
     if (this.formSalaIndividual.valid) {
       const request: salaRequest = {
         piso: Number(this.formSalaIndividual.value.piso),
@@ -48,10 +60,8 @@ export class SalasIndividualesComponent implements OnInit {
         prioridad: Number(this.formSalaIndividual.value.prioridad),
         capacidad: Number(this.formSalaIndividual.value.capacidad),
       };
-      console.log(request);
       this.salaService.salasDisponibles(request).subscribe({
         next: (data) => {
-          console.log(data); // Asegúrate de que esto es un array
           if (Array.isArray(data) && data.length > 0) {
             this.listSala = data.map(item => {
               return {

@@ -1,40 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalEditSalaComponent } from '../modal-edit-sala/modal-edit-sala.component';
-
 import { CommonModule } from '@angular/common';
 import { ModalEditSalaService } from '../modal-edit-sala.service';
+import { PanelUsuariosService } from '../services/panel-usuarios.service';
+import { Sala } from '../models/sala';
 
 @Component({
   selector: 'app-panel-salas',
   standalone: true,
-  imports: [ModalEditSalaComponent,CommonModule],
+  imports: [ModalEditSalaComponent, CommonModule],
   templateUrl: './panel-salas.component.html',
-  styleUrl: './panel-salas.component.css'
+  styleUrls: ['./panel-salas.component.css'],
 })
-export class PanelSalasComponent {
+export class PanelSalasComponent implements OnInit {
 
-  salas = [
-    { id: 1, nombreSala: 'A1' ,capacidad:' 23',piso:0},
-    { id: 2, nombreSala: 'A2' ,capacidad:' 32', piso:0},
-    { id: 3, nombreSala: 'A3' ,capacidad:' 40',piso:0 },
-    { id: 4, nombreSala: 'A4' ,capacidad:' 32',piso:0 },
-    { id: 5, nombreSala: 'B1' ,capacidad:' 18',piso:1}
-  ];
+  salas: Sala[] = [];
 
-  constructor(private modalEditSalaService: ModalEditSalaService) {}
+  constructor(
+    private modalEditSalaService: ModalEditSalaService,
+    private panelUsuarioService: PanelUsuariosService
+  ) {}
 
-  eliminarSala(id: number) {
-    if (confirm('¿Estás seguro de que deseas eliminar esta sala?')) {
-      this.modalEditSalaService.deleteSala(id).subscribe({
+  ngOnInit() {
+    console.log("entre");
+    this.cargarSalas();
+  }
+
+  // Método para cargar todas las salas
+  cargarSalas() {
+    this.panelUsuarioService.traerSalas().subscribe({
+      next: (data) => {  // Ahora 'data' es un array de Sala
+        console.log(data);
+        this.salas = data; // Asigna las salas obtenidas al array
+        console.log('Salas cargadas:', this.salas);
+      },
+      error: (error: any) => {
+        console.error('Error al cargar las salas:', error);
+      },
+    });
+  }
+  
+  eliminarSala(idSala: number) {
+    const confirmacion = confirm('¿Estás seguro de que deseas eliminar esta sala?');
+    if (confirmacion) {
+      this.modalEditSalaService.deleteSala(idSala).subscribe({
         next: (response) => {
-          console.log('Usuario eliminado:', response);
-          location.reload();
+          console.log('Sala eliminada:', response);
+          this.cargarSalas(); // Recarga la lista de salas después de eliminar
         },
         error: (error) => {
-          console.error('Error al eliminar el usuario:', error);
-          
-        }
+          console.error('Error al eliminar la sala:', error);
+        },
       });
     }
   }
+ 
 }

@@ -95,7 +95,6 @@
 
 
         <div class="contenedor-cards pt-4" style="padding-bottom: 60px;height: auto;">
-
             @if(listSala.length>0){
           <div *ngFor="let sala of listSala; let i = index">
             <app-card-sala 
@@ -107,7 +106,8 @@
                 [prioridad]="sala.priority" 
                 [capacidad]="sala.capacity_sala" 
                 [horaInicio]="sala.horaInicio" 
-                [horaFin]="sala.horaFin" 
+                [horaFin]="sala.horaFin"
+                [propertyForm]="propertyForm" 
                 [modalId]="'modal' + i"
                >
             </app-card-sala>

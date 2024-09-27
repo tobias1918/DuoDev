@@ -9,26 +9,39 @@
       <div class="modal-content rounded-4 shadow">
         <div class="modal-header p-5 pb-4 border-bottom-0">
           <h1 class="fw-bold mb-0 fs-2">Editar Sala</h1>
+         
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-  
+        
+        <ul class="list-group my-4">
+          <li class="list-group-item text-center">Datos existentes</li>
+          <li class="list-group-item text-center">Nombre: <strong>{{sala.nameSala}}</strong></li>
+          <li class="list-group-item text-center">Habitación: <strong>{{sala.codSala}}</strong></li>
+          <li class="list-group-item text-center">Capacidad: <strong>{{sala.capacitySala}}</strong></li>
+        </ul>
         <div class="modal-body p-5 pt-0">
-          <form [formGroup]="editSalaForm" (ngSubmit)="guardarCambios()"> 
-            <input type="hidden" formControlName="id" value="usuario.id">
-            
+          <form [formGroup]="editSalaForm" (ngSubmit)="guardarCambiosa()">
+            <input type="hidden" formControlName="idSala">
+          
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-3" id="floatingName" formControlName="nombreSala" placeholder="Nombre">
+              <input type="text" class="form-control rounded-3" id="floatingName" formControlName="nameSala" placeholder="Nombre">
               <label for="floatingName">Nombre Sala</label>
             </div>
-            
+          
             <div class="form-floating mb-3">
-              <input type="number" class="form-control rounded-3" id="floatingSurname" formControlName="capacidad" placeholder="Apellido">
-              <label for="floatingSurname">Capacidad</label>
+              <input type="text" class="form-control rounded-3" id="floatingCode" formControlName="codSala" placeholder="Código">
+              <label for="floatingCode">Código de la Sala</label>
             </div>
-
-             
+          
+            <div class="form-floating mb-3">
+              <input type="number" class="form-control rounded-3" id="floatingCapacity" formControlName="capacitySala" placeholder="Capacidad">
+              <label for="floatingCapacity">Capacidad</label>
+            </div>
+          
             <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Guardar Cambios</button>
           </form>
+          
+          
         </div>
         
       </div>

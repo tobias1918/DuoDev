@@ -1,105 +1,177 @@
 <div class="contenedor-general">
-  <div style="width: 76%">
-    <div class="border rounded mt-3 p-5 text-bg-dark">
-      <h1 class="display-4 fw-bold">Salas Multiples</h1>
-      
+  <div style="width: 76%;">
 
-     
 
-      <div class="filtros d-flex align-items-center" style="max-width: 90%">
-        <div class="mb-3 flex-fill me-3">
-          <label for="exampleFormControlInput1" class="form-label">Capacidad</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese la capacidad" />
-        </div>
 
-        <div class="mb-3 flex-fill me-3">
-          <label for="select1" class="form-label">N° De Piso</label>
-          <select class="form-select" id="select1" aria-label="Seleccionar una opción">
-            <option selected>Seleccionar una opción</option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-        </div>
+      <div class="border rounded mt-3 p-5 text-bg-dark">
+          <h1 class="display-4 fw-bold ">Sala Multiples</h1>
 
-        <div class="mb-3 flex-fill me-3">
-          <label for="select2" class="form-label">N° De Habitación</label>
-          <select class="form-select" id="select2" aria-label="Seleccionar una opción">
-            <option selected>Seleccionar una opción</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </div>
-      </div>
+          <div class="filtros d-flex align-items-center " style="max-width: 90%;">
 
-      <div class="d-flex justify-content-start">
-        <button type="button" class="btn btn-primary">Buscar sala</button>
-      </div>
-    </div>
+             
+              <form [formGroup]="formSalaMultiple" (ngSubmit)="buscarSalasDisponibles()" class="d-flex">
+              <div class="mb-3 flex-fill me-3">
+                  <label for="select1" class="form-label">N° De Piso</label>
+                  <select class="form-select" id="select1" aria-label="Seleccionar una opción" formControlName="piso">
+                      <option selected value="0">Planta Baja</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                  </select>
+              </div>
 
-    <main>
-      <div class="container py-2 px-0">
-
-        <div class="row align-items-md-stretch">
           
-          <div class="col-md-3 d-flex flex-column align-items-start justify-content-center gap-0 ">
-            <div class="list-group shadow">
-              <div class="list-group-item d-flex gap-3 py-3" >
-                <i class="bi bi-people"></i>
-                      <div class="d-flex gap-2 w-100 justify-content-between">
-                  <div>
-                    <h6 class="mb-0">Capacidad Total: 57</h6>
-                    <p class="mb-0 opacity-75">Sumatoria de capacidades </p>
+
+              <div class="mb-3 flex-fill me-3">
+                  <label for="exampleFormControlInput1" class="form-label" >Capacidad</label>
+                  <input type="number" class="form-control" id="exampleFormControlInput1"
+                      placeholder="Ingrese la capacidad" formControlName="capacidad">
+              </div>
+
+             
+              <div class="horario">
+                  <i class="bi bi-clock" style="position: relative;top: 8px;right: 8px;"></i>
+              <div class="mb-3 flex-fill ">
+                  <label for="select1" class="form-label" style="width: 100%;text-align: center;">Hora</label>
+                  <select  class="form-select hora" id="select1" aria-label="Seleccionar una opción" formControlName="hora">
+                      <option selected value=8>08</option>
+                      <option value=9>09</option>
+                      <option value=10>10</option>
+                      <option value=11>11</option>
+                      <option value=12>12</option>
+                      <option value=13>13</option>
+                      <option value=14>14</option>
+                      <option value=15>15</option>
+                      <option value=16>16</option>
+                      <option value=17>17</option>
+                  </select>
+              </div>
+              <div class="mb-3 flex-fill ">
+                  <label for="select1" class="form-label" style="width: 100%;text-align: center;">Minutos</label>
+                  <select class="form-select hora" id="select1" aria-label="Seleccionar una opción" formControlName="minutos">
+                      <option selected value=0>00</option>
+                      <option value=15>15</option>
+                      <option value=30>30</option>
+                      <option value=45>45</option>
+                  </select>
+              </div>
+              </div>
+
+              
+
+
+              <div class="mb-3 flex-fill me-3">
+                  <label for="select2" class="form-label">Duración</label>
+                  <select class="form-select" id="select2" aria-label="Seleccionar una opción" formControlName="duracion">
+                      <option value=15>15 min</option>
+                      <option value=30>30 min</option>
+                      <option selected value=60>1 h</option>
+                      <option value=120>2 hs</option>
+                  </select>
+              </div>
+              <div class="mb-3 flex-fill me-5">
+                  <label for="select2" class="form-label">Prioridad</label>
+                  <select class="form-select" id="select2" aria-label="Seleccionar una opción" formControlName="prioridad">
+                      <option value=0>Baja</option>
+                      <option selected value=1>Media</option>
+                      <option value=2>Alta</option>
+
+                  </select>
+                  
+                 
+              </div>
+              <div class="d-flex justify-content-start align-items-center">
+                  <button type="button" class="btn btn-primary" type="submit" style="position: relative;top: 7.5px;" >Buscar sala</button>
+              </div>
+
+              </form>
+          </div>
+      </div>
+
+      <main>
+
+        <div class="container py-2 px-0">
+  
+          <div class="row align-items-md-stretch">
+  
+            <div class="col-md-3 d-flex flex-column align-items-start justify-content-center gap-0 ">
+              <div class="list-group shadow">
+                <div class="list-group-item d-flex gap-3 py-3" >
+                  <i class="bi bi-people"></i>
+                        <div class="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                      <h6 class="mb-0">Capacidad Total: 57</h6>
+                      <p class="mb-0 opacity-75">Sumatoria de capacidades </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="list-group-item d-flex gap-3 py-3" >
-                <i class="bi bi-star"></i>
-                 <div class="d-flex gap-2 w-100 justify-content-between">
-                  <div>
-                    <h6 class="mb-0">Prioridad: Alta</h6>
-                    <p class="mb-0 opacity-75">Prioridad Seleccionada</p>
+                <div class="list-group-item d-flex gap-3 py-3" >
+                  <i class="bi bi-star"></i>
+                   <div class="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                      <h6 class="mb-0">Prioridad: Alta</h6>
+                      <p class="mb-0 opacity-75">Prioridad Seleccionada</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="list-group-item d-flex gap-3 py-3 d-flex justify-content-center" >
-                <button type="button" class="btn btn-danger">
-                  <i class="bi bi-trash"></i> <!-- Icono de eliminar -->
-                  Eliminar todo
-              </button>
-               
+                <div class="list-group-item d-flex gap-3 py-3 d-flex justify-content-center" >
+                  <button type="button" class="btn btn-danger">
+                    <i class="bi bi-trash"></i>
+                    Eliminar todo
+                </button>
+  
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-md-9">
-            <div class="p-2 bg-body-tertiary border rounded-3 d-flex justify-content-center align-items-center gap-5"
-              style="min-height: 50px">
-              <app-card-selected></app-card-selected>
-              <app-card-selected></app-card-selected>
-              <app-card-selected></app-card-selected>
+  
+            <div class="col-md-9">
+              <div class="p-2 bg-body-tertiary border rounded-3 d-flex justify-content-center align-items-center gap-5"
+                style="min-height: 50px">
+                <app-card-selected></app-card-selected>
+                <app-card-selected></app-card-selected>
+                <app-card-selected></app-card-selected>
+              </div>
             </div>
           </div>
         </div>
+  
+      </main>
+
+
+
+      <div class="contenedor-cards pt-4" style="padding-bottom: 60px;height: auto;">
+          @if(listSala.length>0){
+        <div *ngFor="let sala of listSala; let i = index">
+          <app-card-sala-2
+              [idSala]="sala.id_sala"
+              [idReserva]="sala.id_reserva"
+              [piso]="sala.floor_sala" 
+              [nombreSala]="sala.name"
+              [codigoSala]="sala.cod_sala" 
+              [prioridad]="sala.priority" 
+              [capacidad]="sala.capacity_sala" 
+              [horaInicio]="sala.horaInicio" 
+              [horaFin]="sala.horaFin"
+              [propertyForm]="propertyForm" 
+              [modalId]="'modal' + i"
+             >
+          </app-card-sala-2>
+          </div>
+          }@else{
+              <div class="container my-5" >
+                  <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5 d-flex justify-content-center align-items-center " style="min-height: 50vh !important;">
+                   
+                      <i class="bi bi-info-circle" style="font-size: 30px;margin-right: 10px;"></i>
+                    <h3 class="text-body-secondary" >Completa el formulario <br> para visualizar las salas disponibles</h3>
+              
+            
+                  </div>
+                </div>
+          }
+         
       </div>
-    </main>
 
-    <div></div>
 
-    <div class="contenedor-cards pt-4" style="padding-bottom: 60px; height: auto">
-      <app-card-sala >
-      </app-card-sala>
-      <app-card-sala >
-      </app-card-sala>
-      <app-card-sala>
-      </app-card-sala>
-      <app-card-sala >
-      </app-card-sala>
-      <app-card-sala>
-      </app-card-sala>
-    </div>
+
   </div>
 </div>

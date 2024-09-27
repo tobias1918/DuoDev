@@ -1,23 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { appsettings } from '../settings/appsettings';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalEditSalaService {
 
-  private apiUrl = 'https://example.com/api/usuarios'; // URL de la API de ejemplo
+  private baseUrl:string = appsettings.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   // Método para actualizar un usuario
   updateSala(sala: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${sala.id}`, sala); // Actualiza el usuario basado en su ID
+    return this.http.put(`${this.baseUrl}Sala/ActualizarSala`, sala); // Asegúrate de que la URL sea la correcta
   }
 
   deleteSala(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}Sala/BorrarSala?id=${id}`);
   }
 
 }

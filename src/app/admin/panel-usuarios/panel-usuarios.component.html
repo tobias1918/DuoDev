@@ -15,13 +15,13 @@
           <div class="d-flex justify-content-between">
             <strong class="text-gray-dark">Nombre</strong>
           </div>
-          <span class="d-block">{{usuario.nombre}}</span>
+          <span class="d-block">{{usuario.name}}</span>
         </div>
         <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
           <div class="d-flex justify-content-between">
             <strong class="text-gray-dark">Apellido</strong>
           </div>
-          <span class="d-block">{{usuario.apellido}}</span>
+          <span class="d-block">{{usuario.surname}}</span>
         </div>
         
         <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
@@ -35,7 +35,16 @@
             <div class="d-flex justify-content-between">
               <strong class="text-gray-dark">Rol</strong>
             </div>
-            <span class="d-block">{{usuario.rol}}</span>
+
+            @if(usuario.rol==0){
+              <span class="d-block">Usuario</span>
+            }
+            @if(usuario.rol==1){
+              <span class="d-block">Admin</span>
+            }
+            @if(usuario.rol==2){
+              <span class="d-block">Read</span>
+            }
           </div>
           <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
             <div class="d-flex justify-content-between">
@@ -43,7 +52,7 @@
 
               <div class="d-flex gap-2">
               <app-modal-edit-usuario [usuario]="usuario"  [modalId]="'modal' + i"></app-modal-edit-usuario>
-              <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+              <button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuario.idUser)">Eliminar</button>
 
             </div>
 
