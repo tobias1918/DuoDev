@@ -17,7 +17,8 @@ namespace GestionSalas.Repositories.Reposories.interfaces
         Task<List<Reserva>> GetAllReservas();
         Task SaveChangesAsync();
         Task<List<ResponseSalasDisponiblesDTO>> GetDisponiblesSalas(DateTime horaInicio, DateTime horaFin, int capacidad, int piso, int prioridad);
-        Task<List<dynamic>> GetUserReservs(int idUser);
+        Task<List<Reserva>> GetUserReservasSimples(int idUser);
+        Task<List<List<Reserva>>>GetUserReservasMultiples(int idUser);
         Task CreateMultiReserv(List<Reserva> reservaList);
         // dynamic para indicar que puedo devolver una lista sin espeficar el tipo
     }

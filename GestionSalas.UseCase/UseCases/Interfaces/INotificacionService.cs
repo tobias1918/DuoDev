@@ -9,8 +9,6 @@ namespace GestionSalas.UseCase.UseCases.Interfaces
 {
     public interface INotificacionService
     {
-
-        
         Task DeleteNotificacion(int idNotificacion);
         Task<List<Notificacion>> GetUserNotificaciones(int idUser);
         Task SaveChangesAsync();

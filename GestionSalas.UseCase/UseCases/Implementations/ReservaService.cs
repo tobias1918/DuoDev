@@ -150,11 +150,11 @@ namespace GestionSalas.UseCase.UseCases.Implementations
         }
 
 
-        public async Task<List<object>> GetUserReservs(int idUser) //dynamic devolver lista de cualquier tipo
+        public async Task<List<Reserva>> GetUserReservasSimples(int idUser) //dynamic devolver lista de cualquier tipo
         {
             try
             {
-                var listReservas = await _reservaRepository.GetUserReservs(idUser);
+                var listReservas = await _reservaRepository.GetUserReservasSimples(idUser);
                 if (listReservas == null)
                 {
                     throw new Exception("NO TIENES RESERVAS");
@@ -167,6 +167,26 @@ namespace GestionSalas.UseCase.UseCases.Implementations
 
             }
         }
+     
+        public async Task<List<List<Reserva>>> GetUserReservasMultiples(int idUser) //dynamic devolver lista de cualquier tipo
+        {
+            try
+            {
+                var listReservas = await _reservaRepository.GetUserReservasMultiples(idUser);
+                if (listReservas == null)
+                {
+                    throw new Exception("NO TIENES RESERVAS");
+                }
+                return listReservas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar la reserva. Error: ", ex);
+
+            }
+        }
+
+
 
 
         public async Task CreateMultiReserv(List<Reserva> listReservas)

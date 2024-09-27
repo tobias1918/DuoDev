@@ -5,10 +5,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GestionSalas.Repositories.Migrations
 {
-    public partial class creacionLoginSalaReserva : Migration
+    public partial class AgregarTablas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "notificaciones",
+                columns: table => new
+                {
+                    id_notificacion = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id_user = table.Column<int>(type: "int", nullable: false),
+                    titulo = table.Column<string>(type: "varchar(70)", maxLength: 70, nullable: false),
+                    mensaje = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_notificaciones", x => x.id_notificacion);
+                });
+
             migrationBuilder.CreateTable(
                 name: "salas",
                 columns: table => new
@@ -87,6 +102,9 @@ namespace GestionSalas.Repositories.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "notificaciones");
+
             migrationBuilder.DropTable(
                 name: "reservas");
 

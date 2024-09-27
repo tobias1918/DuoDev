@@ -201,7 +201,7 @@ namespace GestionSalas.Repositories.Reposories.implementations
                     idUser = reserva.idUsuario,
                     titulo = "Tu reserva cambió de estado",
                     mensaje = $"Tu reserva tuvo un cambio de estado a {reserva.state}",
-                    idReserva = reserva.idReserva 
+                   
                 };
                 _context.Notificacion.Add(notificacion);
                 _context.SaveChanges();
@@ -212,11 +212,60 @@ namespace GestionSalas.Repositories.Reposories.implementations
             }
         }
 
-        public async Task<List<object>> GetUserReservs(int idUser) 
+        public async Task<List<Reserva>> GetUserReservasSimples(int idUser) 
         {
 
-            var reservasSimples = new List<Reserva>();
+            var reservasComunes = new List<Reserva>();
+
+            try
+            {
+                // Obtener todas las reservas del usuario
+                var todasReservas = await _context.Reserva
+                    .Where(r => r.idUsuario == idUser)
+                    .ToListAsync();
+
+                // Agregar solo reservas que no están en multireservas
+                for (int i = 0; i < todasReservas.Count; i++)
+                {
+                    var reservaActual = todasReservas[i];
+                    bool esMultiReserva = false;
+
+                    for (int j = 0; j < todasReservas.Count; j++)
+                    {
+                        if (i != j && reservaActual.horaInicio == todasReservas[j].horaInicio &&
+                            reservaActual.horaFin == todasReservas[j].horaFin &&
+                            reservaActual.idSala != todasReservas[j].idSala)
+                        {
+                            esMultiReserva = true;
+                            break; // Si se encuentra una multi-reserva, salir del bucle
+                        }
+                    }
+
+                    // Agregar solo si no es parte de una multi-reserva
+                    if (!esMultiReserva)
+                    {
+                        reservasComunes.Add(reservaActual);
+                    }
+                }
+
+                if (reservasComunes.Count == 0)
+                {
+                    throw new Exception($"No se encontraron reservas comunes para el usuario {idUser}");
+                }
+
+                return reservasComunes;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en GetUserReservsComunes: {ex.Message}");
+                throw new Exception("Ocurrió un error al obtener las reservas comunes", ex);
+            }
+
+        }
+        public async Task<List<List<Reserva>>> GetUserReservasMultiples(int idUser)
+        {
             var multiReservas = new List<List<Reserva>>();
+            var reservasAgregadas = new HashSet<int>(); // Para evitar agregar duplicados
 
             try
             {
@@ -229,68 +278,44 @@ namespace GestionSalas.Repositories.Reposories.implementations
                 for (int i = 0; i < todasReservas.Count; i++)
                 {
                     var reservaActual = todasReservas[i];
+
+                    // Verificar si ya se ha procesado la reserva actual
+                    if (reservasAgregadas.Contains(reservaActual.idReserva))
+                        continue;
+
                     var grupoMultiReserva = new List<Reserva> { reservaActual };
-                    bool esMultiReserva = false;// la reserva ACTUAL es parte de una multi-reserva?
 
-
-                    for (int j = i + 1; j < todasReservas.Count; j++) //itera entre todas las reservas menos la actual
+                    for (int j = 0; j < todasReservas.Count; j++)
                     {
-                        var otraReserva = todasReservas[j];
-                        if (reservaActual.horaInicio == otraReserva.horaInicio &&
-                            reservaActual.horaFin == otraReserva.horaFin &&
-                            reservaActual.idSala != otraReserva.idSala)
+                        if (i != j && reservaActual.horaInicio == todasReservas[j].horaInicio &&
+                            reservaActual.horaFin == todasReservas[j].horaFin &&
+                            reservaActual.idSala != todasReservas[j].idSala)
                         {
-                            esMultiReserva = true;
-                            grupoMultiReserva.Add(otraReserva);
+                            grupoMultiReserva.Add(todasReservas[j]);
+                            reservasAgregadas.Add(todasReservas[j].idReserva); // Marcar como agregada
                         }
                     }
 
-                    if (esMultiReserva)
+                    // Solo agregar el grupo si contiene más de una reserva
+                    if (grupoMultiReserva.Count > 1)
                     {
-                        // Verificar si este grupo ya existe en multiReservas
-                        bool grupoExiste = false;
-                        foreach (var grupo in multiReservas)
-                        {
-                            if (grupo.Contains(reservaActual))
-                            {
-                                grupoExiste = true;
-                                break;
-                            }
-                        }
-
-                        if (!grupoExiste) // Si el grupo no existe, agregarlo a la lista de multiReservas
-                        {
-                            multiReservas.Add(grupoMultiReserva);
-                        }
-                    }
-                    // Si no es una multi-reserva
-                    // verificar si la reserva actual no está en reservasSimples ni en multiReservas
-                    else if (!reservasSimples.Contains(reservaActual) &&
-                             !multiReservas.Any(grupo => grupo.Contains(reservaActual)))
-                    {
-                        reservasSimples.Add(reservaActual);
+                        multiReservas.Add(grupoMultiReserva);
+                        reservasAgregadas.Add(reservaActual.idReserva); // Marcar como agregada
                     }
                 }
 
-                //dejamos el contenido en una sola lista
-                var resultado = new List<object>{ reservasSimples, multiReservas };
-
-                //dejamos el contenido en una sola lista
-                if (reservasSimples.Count == 0 && multiReservas.Count == 0)
+                if (multiReservas.Count == 0)
                 {
-                    throw new Exception($"No se encontraron reservas para el usuario {idUser}");
+                    throw new Exception($"No se encontraron multireservas para el usuario {idUser}");
                 }
 
-                return resultado;
+                return multiReservas; // Devuelve solo la lista de grupos de reservas
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error en GetUserReservs: {ex.Message}");
-                throw new Exception("Ocurrió un error al obtener las reservas", ex);
+                Console.WriteLine($"Error en GetUserReservsMultiReservas: {ex.Message}");
+                throw new Exception("Ocurrió un error al obtener las multireservas", ex);
             }
-            
-
-
         }
 
         public async Task CreateMultiReserv(List<Reserva> multiReservas)

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionSalas.Repositories.Migrations
 {
     [DbContext(typeof(GestionSalasContext))]
-    [Migration("20240926001134_creacionLoginSalaReserva")]
-    partial class creacionLoginSalaReserva
+    [Migration("20240927062255_AgregarTablas")]
+    partial class AgregarTablas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,36 @@ namespace GestionSalas.Repositories.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("GestionSalas.Entity.Entidades.Notificacion", b =>
+                {
+                    b.Property<int>("idNotificacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id_notificacion");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idNotificacion"), 1L, 1);
+
+                    b.Property<int>("idUser")
+                        .HasColumnType("int")
+                        .HasColumnName("id_user");
+
+                    b.Property<string>("mensaje")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("mensaje");
+
+                    b.Property<string>("titulo")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("varchar(70)")
+                        .HasColumnName("titulo");
+
+                    b.HasKey("idNotificacion");
+
+                    b.ToTable("notificaciones", (string)null);
+                });
 
             modelBuilder.Entity("GestionSalas.Entity.Entidades.Reserva", b =>
                 {

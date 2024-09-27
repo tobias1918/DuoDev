@@ -172,8 +172,8 @@ namespace GestionSalas.API.Controllers
             }
         }
 
-        [HttpGet("getUserReservs")]
-        public async Task<ActionResult> GetUserReservs(int idUser)
+        [HttpGet("getUserReservaSimples")]
+        public async Task<ActionResult> GetUserReservasSimples(int idUser)
         {
             try
             {
@@ -182,7 +182,7 @@ namespace GestionSalas.API.Controllers
                     return BadRequest("Usuario no valido.");
                 }
 
-                var listReservs = await _reservaService.GetUserReservs(idUser);
+                var listReservs = await _reservaService.GetUserReservasSimples(idUser);
 
 
                 return Ok(listReservs);
@@ -196,11 +196,35 @@ namespace GestionSalas.API.Controllers
            
         }
 
+        [HttpGet("getUserReservaMultiples")]
+        public async Task<ActionResult> GetUserReservasMultiples(int idUser)
+        {
+            try
+            {
+                if (idUser == null || idUser == 0)
+                {
+                    return BadRequest("Usuario no valido.");
+                }
+
+                var listReservs = await _reservaService.GetUserReservasMultiples(idUser);
+
+
+                return Ok(listReservs);
+
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al buscar las reservas del usuario: {ex.Message}");
+            }
+
+        }
+
         [HttpPost("CrearMultiReserva")]
         public async Task<IActionResult> CreateMultiReserv([FromBody] List<Reserva> reservas)
         {
             try
-            {0
+            {
                 await _reservaService.CreateMultiReserv(reservas);
                 return Ok("Reservas creadas exitosamente.");
             }

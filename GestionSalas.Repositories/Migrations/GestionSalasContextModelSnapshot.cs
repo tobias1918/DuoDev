@@ -22,6 +22,36 @@ namespace GestionSalas.Repositories.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("GestionSalas.Entity.Entidades.Notificacion", b =>
+                {
+                    b.Property<int>("idNotificacion")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id_notificacion");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idNotificacion"), 1L, 1);
+
+                    b.Property<int>("idUser")
+                        .HasColumnType("int")
+                        .HasColumnName("id_user");
+
+                    b.Property<string>("mensaje")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("mensaje");
+
+                    b.Property<string>("titulo")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("varchar(70)")
+                        .HasColumnName("titulo");
+
+                    b.HasKey("idNotificacion");
+
+                    b.ToTable("notificaciones", (string)null);
+                });
+
             modelBuilder.Entity("GestionSalas.Entity.Entidades.Reserva", b =>
                 {
                     b.Property<int>("idReserva")
