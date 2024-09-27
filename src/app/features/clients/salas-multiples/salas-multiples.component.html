@@ -100,7 +100,7 @@
                   <i class="bi bi-people"></i>
                         <div class="d-flex gap-2 w-100 justify-content-between">
                     <div>
-                      <h6 class="mb-0">Capacidad Total: 57</h6>
+                      <h6 class="mb-0">Capacidad Total: {{ capacidadTotal }}</h6>
                       <p class="mb-0 opacity-75">Sumatoria de capacidades </p>
                     </div>
                   </div>
@@ -109,16 +109,30 @@
                   <i class="bi bi-star"></i>
                    <div class="d-flex gap-2 w-100 justify-content-between">
                     <div>
-                      <h6 class="mb-0">Prioridad: Alta</h6>
+                      @if(propertyForm==0){
+                        <h6 class="mb-0">Prioridad: Baja</h6>
+                      }
+                      
+                      @if(propertyForm==1){
+                        <h6 class="mb-0">Prioridad: Media</h6>
+                      }
+                      
+                      @if(propertyForm==2){
+                        <h6 class="mb-0">Prioridad: Alta</h6>
+                      }
+                      
                       <p class="mb-0 opacity-75">Prioridad Seleccionada</p>
                     </div>
                   </div>
                 </div>
-                <div class="list-group-item d-flex gap-3 py-3 d-flex justify-content-center" >
-                  <button type="button" class="btn btn-danger">
+                <div class="list-group-item gap-3 py-3 justify-content-center" style="display: flex;flex-direction: column;">
+                  <button type="button" class="btn btn-success" (click)="confirmarMultiReservas()" style="height: 47px;">
+                    Confirmar MultiReservas
+                  </button>
+                  <button type="button" class="btn btn-danger" (click)="eliminarTodo()">
                     <i class="bi bi-trash"></i>
                     Eliminar todo
-                </button>
+                  </button>
   
                 </div>
               </div>
@@ -127,9 +141,24 @@
             <div class="col-md-9">
               <div class="p-2 bg-body-tertiary border rounded-3 d-flex justify-content-center align-items-center gap-5"
                 style="min-height: 50px">
-                <app-card-selected></app-card-selected>
-                <app-card-selected></app-card-selected>
-                <app-card-selected></app-card-selected>
+                
+                <div *ngFor="let reserva of listReservasMultiples">
+                  <app-card-selected
+                  [idSala]="reserva.idSala"
+                  [idReserva]="reserva.idReserva"
+                  [codigoSala]="reserva.codigoSala"
+                  [prioridad]="reserva.prioridad"
+                  [piso]="reserva.piso"
+                  [nombreSala]="reserva.nombreSala"
+                  [capacidad]="reserva.capacidad"
+                  [horaInicio]="reserva.horaInicio"
+                  [horaFin]="reserva.horaFin"
+                  [propertyForm]="reserva.propertyForm"
+                  (eliminarReserva)="eliminarReserva(reserva.idSala)">
+                  </app-card-selected>
+                </div>
+                
+              
               </div>
             </div>
           </div>
@@ -143,6 +172,7 @@
           @if(listSala.length>0){
         <div *ngFor="let sala of listSala; let i = index">
           <app-card-sala-2
+          (reservaSeleccionada)="manejarReservaSeleccionada($event)"
               [idSala]="sala.id_sala"
               [idReserva]="sala.id_reserva"
               [piso]="sala.floor_sala" 

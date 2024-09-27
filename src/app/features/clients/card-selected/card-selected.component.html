@@ -7,28 +7,30 @@
             <li class="list-group-item">
                 <h3>
 
-                    <strong>Piso 1 : Sala 2</strong>
+                    <strong>Piso {{piso}} : Sala {{codigoSala}}</strong>
                 </h3>
             </li>
             <li class="list-group-item">
                 <i class="bi bi-clock"></i> <!-- Icono de reloj -->
-                Horario Inicio : 13:30
+                Horario Inicio : {{horaInicio}}
             </li>
             <li class="list-group-item">
                 <i class="bi bi-clock-fill"></i> <!-- Icono de reloj relleno -->
-                Horario Fin: 14:30
+                Horario Fin: {{horaFin}}
             </li>
             <li class="list-group-item">
                 <i class="bi bi-people"></i> <!-- Icono de personas -->
-                Capacidad máxima: 26
+                Capacidad máxima: {{capacidad}}
             </li>
 
         
             <div class="d-flex justify-content-center align-items-center my-2">
-                <button type="button" class="btn btn-warning">
+                <button type="button" class="btn btn-warning" (click)="eliminar(idSala)">
                     <i class="bi bi-trash"></i> <!-- Icono de eliminar -->
-                    Eliminar selección 
-                </button>
+                    Eliminar selección
+                  </button>
+                  
+                  
             </div>
         </ul>
         

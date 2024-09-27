@@ -4,13 +4,13 @@ import { crearReservaParam } from '../models/crearReservaParam';
 import { SalaService } from '../services/salas-individuales.service';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'app-modal-2',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent2 implements OnInit {
   @Input() idSala!: number;
   @Input() idReserva!: number;
   @Input() codigoSala!: string;

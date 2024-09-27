@@ -24,14 +24,14 @@ export const routes: Routes = [
         component: PageComponent, // El PageComponent es el contenedor principal
         children: [
           { path: 'home', component: HomeComponent,canActivate:[authGuard]},
-          { path: 'reserva', component: ReservasComponent },
-          { path: 'reserva/salas-individuales', component: SalasIndividualesComponent },
-          { path: 'reserva/salas-multiples', component: SalasMultiplesComponent },
-          { path: 'mis-reservas', component: MisReservasComponent },
-          { path: 'perfil', component: ProfileComponent },
-          { path: 'editar-perfil', component: EditProfileComponent },
-          { path: 'panel-usuario', component: PanelUsuariosComponent },
-          { path: 'panel-salas', component: PanelSalasComponent },
+          { path: 'reserva', component: ReservasComponent ,canActivate:[authGuard]},
+          { path: 'reserva/salas-individuales', component: SalasIndividualesComponent ,canActivate:[authGuard]},
+          { path: 'reserva/salas-multiples', component: SalasMultiplesComponent ,canActivate:[authGuard]},
+          { path: 'mis-reservas', component: MisReservasComponent ,canActivate:[authGuard]},
+          { path: 'perfil', component: ProfileComponent ,canActivate:[authGuard]},
+          { path: 'editar-perfil', component: EditProfileComponent,canActivate:[authGuard]},
+          { path: 'panel-usuario', component: PanelUsuariosComponent ,canActivate:[authGuard]},
+          { path: 'panel-salas', component: PanelSalasComponent ,canActivate:[authGuard]},
           { path: '', redirectTo: 'home', pathMatch: 'full' } // Redirige a home si no hay una ruta
           
         ]

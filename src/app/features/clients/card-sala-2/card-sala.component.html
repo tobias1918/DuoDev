@@ -46,13 +46,13 @@
                         Capacidad máxima: {{capacidad}}
                     </li>
                  
-
+                  
                     <div class="d-flex justify-content-center align-items-center my-2">
-                        <app-modal [modalId]="modalId" [prioridad]="prioridad" [piso]="piso" [nombreSala]="nombreSala"
-                            [capacidad]="capacidad" [horaInicio]="horaInicio" [horaFin]="horaFin" [idSala]="idSala"
-                            [idReserva]="idReserva" [codigoSala]="codigoSala" [propertyForm]="propertyForm">
-                        </app-modal>
+                        <button type="button" class="btn btn-primary" (click)="seleccionarReservaMultiple()">
+                            Seleccionar Reserva
+                        </button>
                     </div>
+                    
                 </ul>
             </div>
 
